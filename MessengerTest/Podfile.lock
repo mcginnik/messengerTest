@@ -1,0 +1,16 @@
+PODS:
+  - SendbirdChatSDK (4.0.15)
+
+DEPENDENCIES:
+  - SendbirdChatSDK (~> 4.0.0)
+
+SPEC REPOS:
+  trunk:
+    - SendbirdChatSDK
+
+SPEC CHECKSUMS:
+  SendbirdChatSDK: 04eee2f312837076f495e29995354d4eb7f88ad5
+
+PODFILE CHECKSUM: 7753d22549fba8c747b26a0da1fa75f375ee4136
+
+COCOAPODS: 1.11.3

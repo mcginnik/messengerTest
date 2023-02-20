@@ -7,18 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		258155118379DA9735346ED1 /* Pods_MessengerTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CB3D9F7D9C066F3B923415 /* Pods_MessengerTest.framework */; };
 		A7766D8E29A3C65300E842ED /* MessengerTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766D8D29A3C65300E842ED /* MessengerTestApp.swift */; };
-		A7766D9029A3C65300E842ED /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766D8F29A3C65300E842ED /* ContentView.swift */; };
 		A7766D9229A3C65500E842ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7766D9129A3C65500E842ED /* Assets.xcassets */; };
 		A7766D9529A3C65500E842ED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7766D9429A3C65500E842ED /* Preview Assets.xcassets */; };
+		A7766DA729A3CC8900E842ED /* ChannelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DA629A3CC8900E842ED /* ChannelsView.swift */; };
+		A7766DAA29A3CE8D00E842ED /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DA929A3CE8D00E842ED /* ChatService.swift */; };
+		A7766DAE29A3D03D00E842ED /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DAD29A3D03D00E842ED /* Logging.swift */; };
+		A7766DB129A3D06100E842ED /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DB029A3D06100E842ED /* AppConfig.swift */; };
+		A7766DB329A3D0E900E842ED /* SendbirdChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DB229A3D0E900E842ED /* SendbirdChatService.swift */; };
+		A7766DB629A3D17700E842ED /* ChatConfiguring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DB529A3D17700E842ED /* ChatConfiguring.swift */; };
+		A7766DB829A3D18A00E842ED /* SendbirdChatConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DB729A3D18A00E842ED /* SendbirdChatConfig.swift */; };
+		A7766DBB29A3D61400E842ED /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DBA29A3D61400E842ED /* AuthService.swift */; };
+		A7766DBE29A3D7D700E842ED /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DBD29A3D7D700E842ED /* MockAuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4EE154FF6E4C0F715EF18B46 /* Pods-MessengerTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessengerTest.release.xcconfig"; path = "Target Support Files/Pods-MessengerTest/Pods-MessengerTest.release.xcconfig"; sourceTree = "<group>"; };
+		51CB3D9F7D9C066F3B923415 /* Pods_MessengerTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessengerTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7766D8A29A3C65300E842ED /* MessengerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessengerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7766D8D29A3C65300E842ED /* MessengerTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerTestApp.swift; sourceTree = "<group>"; };
-		A7766D8F29A3C65300E842ED /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A7766D9129A3C65500E842ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7766D9429A3C65500E842ED /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A7766DA629A3CC8900E842ED /* ChannelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsView.swift; sourceTree = "<group>"; };
+		A7766DA929A3CE8D00E842ED /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		A7766DAD29A3D03D00E842ED /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		A7766DB029A3D06100E842ED /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		A7766DB229A3D0E900E842ED /* SendbirdChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendbirdChatService.swift; sourceTree = "<group>"; };
+		A7766DB529A3D17700E842ED /* ChatConfiguring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConfiguring.swift; sourceTree = "<group>"; };
+		A7766DB729A3D18A00E842ED /* SendbirdChatConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendbirdChatConfig.swift; sourceTree = "<group>"; };
+		A7766DBA29A3D61400E842ED /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		A7766DBD29A3D7D700E842ED /* MockAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthService.swift; sourceTree = "<group>"; };
+		FB1D765DBBF3999954650E21 /* Pods-MessengerTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessengerTest.debug.xcconfig"; path = "Target Support Files/Pods-MessengerTest/Pods-MessengerTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				258155118379DA9735346ED1 /* Pods_MessengerTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +58,8 @@
 			children = (
 				A7766D8C29A3C65300E842ED /* MessengerTest */,
 				A7766D8B29A3C65300E842ED /* Products */,
+				A8D8439F7C32E315E82A3ECF /* Pods */,
+				E35F01EAF51391D782DD8CD5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,7 +75,9 @@
 			isa = PBXGroup;
 			children = (
 				A7766D8D29A3C65300E842ED /* MessengerTestApp.swift */,
-				A7766D8F29A3C65300E842ED /* ContentView.swift */,
+				A7766DAF29A3D05A00E842ED /* Config */,
+				A7766D9C29A3CBB600E842ED /* Main */,
+				A7766D9B29A3CBAC00E842ED /* Util */,
 				A7766D9129A3C65500E842ED /* Assets.xcassets */,
 				A7766D9329A3C65500E842ED /* Preview Content */,
 			);
@@ -67,6 +92,165 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		A7766D9B29A3CBAC00E842ED /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DAC29A3CFB200E842ED /* Logging */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		A7766D9C29A3CBB600E842ED /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DB929A3D60900E842ED /* Auth */,
+				A7766D9D29A3CBCE00E842ED /* Chat */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		A7766D9D29A3CBCE00E842ED /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DA829A3CE7700E842ED /* API */,
+				A7766D9F29A3CC4100E842ED /* Messages */,
+				A7766D9E29A3CC3700E842ED /* Channels */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		A7766D9E29A3CC3700E842ED /* Channels */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DA229A3CC5A00E842ED /* API */,
+				A7766DA129A3CC5300E842ED /* ViewModel */,
+				A7766DA029A3CC4E00E842ED /* View */,
+			);
+			path = Channels;
+			sourceTree = "<group>";
+		};
+		A7766D9F29A3CC4100E842ED /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DA529A3CC6800E842ED /* API */,
+				A7766DA429A3CC6300E842ED /* ViewModel */,
+				A7766DA329A3CC5E00E842ED /* View */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		A7766DA029A3CC4E00E842ED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DA629A3CC8900E842ED /* ChannelsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A7766DA129A3CC5300E842ED /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A7766DA229A3CC5A00E842ED /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		A7766DA329A3CC5E00E842ED /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A7766DA429A3CC6300E842ED /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A7766DA529A3CC6800E842ED /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		A7766DA829A3CE7700E842ED /* API */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DB529A3D17700E842ED /* ChatConfiguring.swift */,
+				A7766DAB29A3CE9200E842ED /* SendbirdChatService */,
+				A7766DA929A3CE8D00E842ED /* ChatService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		A7766DAB29A3CE9200E842ED /* SendbirdChatService */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DB229A3D0E900E842ED /* SendbirdChatService.swift */,
+				A7766DB729A3D18A00E842ED /* SendbirdChatConfig.swift */,
+			);
+			path = SendbirdChatService;
+			sourceTree = "<group>";
+		};
+		A7766DAC29A3CFB200E842ED /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DAD29A3D03D00E842ED /* Logging.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
+		A7766DAF29A3D05A00E842ED /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DB029A3D06100E842ED /* AppConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		A7766DB929A3D60900E842ED /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DBC29A3D7CC00E842ED /* MockAuthService */,
+				A7766DBA29A3D61400E842ED /* AuthService.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		A7766DBC29A3D7CC00E842ED /* MockAuthService */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DBD29A3D7D700E842ED /* MockAuthService.swift */,
+			);
+			path = MockAuthService;
+			sourceTree = "<group>";
+		};
+		A8D8439F7C32E315E82A3ECF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FB1D765DBBF3999954650E21 /* Pods-MessengerTest.debug.xcconfig */,
+				4EE154FF6E4C0F715EF18B46 /* Pods-MessengerTest.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E35F01EAF51391D782DD8CD5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				51CB3D9F7D9C066F3B923415 /* Pods_MessengerTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +258,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A7766D9829A3C65500E842ED /* Build configuration list for PBXNativeTarget "MessengerTest" */;
 			buildPhases = (
+				D55BDE4672CD46FB64EBB4DD /* [CP] Check Pods Manifest.lock */,
 				A7766D8629A3C65300E842ED /* Sources */,
 				A7766D8729A3C65300E842ED /* Frameworks */,
 				A7766D8829A3C65300E842ED /* Resources */,
+				C24C0B8C3DED6CF8DCB23714 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,13 +318,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C24C0B8C3DED6CF8DCB23714 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MessengerTest/Pods-MessengerTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MessengerTest/Pods-MessengerTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MessengerTest/Pods-MessengerTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D55BDE4672CD46FB64EBB4DD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MessengerTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A7766D8629A3C65300E842ED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7766D9029A3C65300E842ED /* ContentView.swift in Sources */,
+				A7766DAE29A3D03D00E842ED /* Logging.swift in Sources */,
+				A7766DAA29A3CE8D00E842ED /* ChatService.swift in Sources */,
+				A7766DB629A3D17700E842ED /* ChatConfiguring.swift in Sources */,
+				A7766DBE29A3D7D700E842ED /* MockAuthService.swift in Sources */,
+				A7766DB129A3D06100E842ED /* AppConfig.swift in Sources */,
+				A7766DB829A3D18A00E842ED /* SendbirdChatConfig.swift in Sources */,
+				A7766DB329A3D0E900E842ED /* SendbirdChatService.swift in Sources */,
+				A7766DBB29A3D61400E842ED /* AuthService.swift in Sources */,
 				A7766D8E29A3C65300E842ED /* MessengerTestApp.swift in Sources */,
+				A7766DA729A3CC8900E842ED /* ChannelsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +497,7 @@
 		};
 		A7766D9929A3C65500E842ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB1D765DBBF3999954650E21 /* Pods-MessengerTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -290,6 +527,7 @@
 		};
 		A7766D9A29A3C65500E842ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EE154FF6E4C0F715EF18B46 /* Pods-MessengerTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
