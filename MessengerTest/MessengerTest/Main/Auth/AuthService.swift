@@ -12,12 +12,24 @@ protocol AuthServiceProtocol {
     func logout(completion: @escaping (Result<Void, Error>) -> Void)
 }
 
+enum AuthServiceError: LocalizedError {
+    case emptyUser
+    
+    var errorDescription: String? {
+        switch self {
+        case .emptyUser:
+            return "The current user is empty... cannot proceed"
+        }
+    }
+}
 
 class AuthService {
     
     // MARK: Properties
     
     static let shared = AuthService()
+    
+    var currentUser: User?
 
     /// Allowing for Dependency injection here, calling the injected service instead of directly  so you can easily swap out if need be
     /// Would instead have this be an automatic static injection setup so that all services are set at complie time, but this is a simple way of doing it for now
@@ -32,7 +44,7 @@ class AuthService {
         self.shared.injected = service
     }
     
-    func login(withEmail email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func login(withEmail email: String, password: String, completion: @escaping (Result<UserID, Error>) -> Void) {
         self.injected?.login(withEmail: email, password: password) { res in
             DispatchQueue.main.async {
                 switch res {
@@ -40,6 +52,7 @@ class AuthService {
                     Logging.LogMe("Failed... \(error)")
                 case .success(let data):
                     Logging.LogMe("Success...\(data)")
+                    self.currentUser = User(id: data)
                     break
                 }
                 completion(res)

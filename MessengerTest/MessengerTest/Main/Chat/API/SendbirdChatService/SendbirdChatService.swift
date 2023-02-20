@@ -8,11 +8,11 @@
 import Foundation
 import SendbirdChatSDK
 
-typealias UserID = String
-
 class SendbirdChatService: ChatServiceProtocol {
     
-    let config = SendbirdChatConfig()
+    static let defaultConfig = SendbirdChatConfig()
+    
+    let config = SendbirdChatService.defaultConfig
     
     func initialize(userID: UserID, completion: @escaping (Result<Void, Error>) -> Void) {
         let initParams = InitParams(

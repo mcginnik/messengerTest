@@ -20,6 +20,13 @@
 		A7766DB829A3D18A00E842ED /* SendbirdChatConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DB729A3D18A00E842ED /* SendbirdChatConfig.swift */; };
 		A7766DBB29A3D61400E842ED /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DBA29A3D61400E842ED /* AuthService.swift */; };
 		A7766DBE29A3D7D700E842ED /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DBD29A3D7D700E842ED /* MockAuthService.swift */; };
+		A7766DDF29A3E56C00E842ED /* ChannelsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DDE29A3E56C00E842ED /* ChannelsViewModel.swift */; };
+		A7766DE229A3EA1200E842ED /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DE129A3EA1200E842ED /* Channel.swift */; };
+		A7766DE429A3EA1900E842ED /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DE329A3EA1900E842ED /* ChatMessage.swift */; };
+		A7766DE629A3EA6B00E842ED /* ChannelsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DE529A3EA6B00E842ED /* ChannelsService.swift */; };
+		A7766DE929A3EA8D00E842ED /* SendbirdChannelsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DE829A3EA8D00E842ED /* SendbirdChannelsService.swift */; };
+		A7766DEB29A3FF1000E842ED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DEA29A3FF1000E842ED /* User.swift */; };
+		A7766DEE29A4028E00E842ED /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DED29A4028E00E842ED /* StringConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +45,13 @@
 		A7766DB729A3D18A00E842ED /* SendbirdChatConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendbirdChatConfig.swift; sourceTree = "<group>"; };
 		A7766DBA29A3D61400E842ED /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A7766DBD29A3D7D700E842ED /* MockAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthService.swift; sourceTree = "<group>"; };
+		A7766DDE29A3E56C00E842ED /* ChannelsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewModel.swift; sourceTree = "<group>"; };
+		A7766DE129A3EA1200E842ED /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		A7766DE329A3EA1900E842ED /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		A7766DE529A3EA6B00E842ED /* ChannelsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsService.swift; sourceTree = "<group>"; };
+		A7766DE829A3EA8D00E842ED /* SendbirdChannelsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendbirdChannelsService.swift; sourceTree = "<group>"; };
+		A7766DEA29A3FF1000E842ED /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A7766DED29A4028E00E842ED /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		FB1D765DBBF3999954650E21 /* Pods-MessengerTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessengerTest.debug.xcconfig"; path = "Target Support Files/Pods-MessengerTest/Pods-MessengerTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +91,7 @@
 				A7766D8D29A3C65300E842ED /* MessengerTestApp.swift */,
 				A7766DAF29A3D05A00E842ED /* Config */,
 				A7766D9C29A3CBB600E842ED /* Main */,
+				A7766DE029A3EA0A00E842ED /* Model */,
 				A7766D9B29A3CBAC00E842ED /* Util */,
 				A7766D9129A3C65500E842ED /* Assets.xcassets */,
 				A7766D9329A3C65500E842ED /* Preview Content */,
@@ -95,6 +110,7 @@
 		A7766D9B29A3CBAC00E842ED /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A7766DEC29A4028100E842ED /* Constants */,
 				A7766DAC29A3CFB200E842ED /* Logging */,
 			);
 			path = Util;
@@ -150,6 +166,7 @@
 		A7766DA129A3CC5300E842ED /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A7766DDE29A3E56C00E842ED /* ChannelsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -157,6 +174,8 @@
 		A7766DA229A3CC5A00E842ED /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A7766DE729A3EA7200E842ED /* SendbirdChannelsService */,
+				A7766DE529A3EA6B00E842ED /* ChannelsService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -232,6 +251,32 @@
 				A7766DBD29A3D7D700E842ED /* MockAuthService.swift */,
 			);
 			path = MockAuthService;
+			sourceTree = "<group>";
+		};
+		A7766DE029A3EA0A00E842ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DE129A3EA1200E842ED /* Channel.swift */,
+				A7766DE329A3EA1900E842ED /* ChatMessage.swift */,
+				A7766DEA29A3FF1000E842ED /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A7766DE729A3EA7200E842ED /* SendbirdChannelsService */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DE829A3EA8D00E842ED /* SendbirdChannelsService.swift */,
+			);
+			path = SendbirdChannelsService;
+			sourceTree = "<group>";
+		};
+		A7766DEC29A4028100E842ED /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DED29A4028E00E842ED /* StringConstants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		A8D8439F7C32E315E82A3ECF /* Pods */ = {
@@ -365,12 +410,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7766DEE29A4028E00E842ED /* StringConstants.swift in Sources */,
+				A7766DE929A3EA8D00E842ED /* SendbirdChannelsService.swift in Sources */,
+				A7766DDF29A3E56C00E842ED /* ChannelsViewModel.swift in Sources */,
+				A7766DE229A3EA1200E842ED /* Channel.swift in Sources */,
+				A7766DE429A3EA1900E842ED /* ChatMessage.swift in Sources */,
+				A7766DEB29A3FF1000E842ED /* User.swift in Sources */,
 				A7766DAE29A3D03D00E842ED /* Logging.swift in Sources */,
 				A7766DAA29A3CE8D00E842ED /* ChatService.swift in Sources */,
 				A7766DB629A3D17700E842ED /* ChatConfiguring.swift in Sources */,
 				A7766DBE29A3D7D700E842ED /* MockAuthService.swift in Sources */,
 				A7766DB129A3D06100E842ED /* AppConfig.swift in Sources */,
 				A7766DB829A3D18A00E842ED /* SendbirdChatConfig.swift in Sources */,
+				A7766DE629A3EA6B00E842ED /* ChannelsService.swift in Sources */,
 				A7766DB329A3D0E900E842ED /* SendbirdChatService.swift in Sources */,
 				A7766DBB29A3D61400E842ED /* AuthService.swift in Sources */,
 				A7766D8E29A3C65300E842ED /* MessengerTestApp.swift in Sources */,

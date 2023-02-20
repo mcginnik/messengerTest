@@ -9,8 +9,10 @@ import Foundation
 
 class MockAuthService: AuthServiceProtocol {
     
+    static let testUserID: String = "307421A8-D395-451F-B192-E62292F16A38"
+    
     func login(withEmail email: String, password: String, completion: @escaping (Result<UserID, Error>) -> Void) {
-        completion(.success("307421A8-D395-451F-B192-E62292F16A38"))
+        completion(.success(MockAuthService.testUserID))
         //completion(.success(UUID().uuidString))
     }
     

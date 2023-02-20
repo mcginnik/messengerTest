@@ -63,6 +63,7 @@ extension MessengerTestApp {
     private func injectServices(){
         injectAuthService()
         injectChatService()
+        injectChannelsService()
     }
     
     private func injectAuthService() {
@@ -71,6 +72,10 @@ extension MessengerTestApp {
     
     private func injectChatService(){
         ChatService.setup(with: SendbirdChatService())
+    }
+    
+    private func injectChannelsService() {
+        ChannelsService.setup(with: SendbirdChannelsService())
     }
     
 }
