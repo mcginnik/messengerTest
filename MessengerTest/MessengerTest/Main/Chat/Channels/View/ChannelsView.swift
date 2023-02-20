@@ -26,29 +26,25 @@ struct ChannelsView: View {
         }
     }
     
-    var channelsList: some View {
-        List {
-            ForEach(viewModel.channels, id: \.self) { item in
-                NavigationLink {
-                    Text("\(item.id)")
-//                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                } label: {
-                    Text("\(item.name)")
-                    //Text(item.timestamp!, formatter: itemFormatter)
-                }
-                .onAppear {
-                    if item == viewModel.channels.last {
-                        viewModel.loadNextPage()
-                    }
-                }
-            }
-            .onDelete(perform: deleteItems)
-        }
-    }
-    
     var body: some View {
         NavigationView {
-            channelsList
+            List {
+                ForEach(viewModel.channels, id: \.self) { item in
+                    NavigationLink {
+                        Text("\(item.id)")
+    //                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                    } label: {
+                        Text("\(item.name)")
+                        //Text(item.timestamp!, formatter: itemFormatter)
+                    }
+                    .onAppear {
+                        if item == viewModel.channels.last {
+                            viewModel.loadNextPage()
+                        }
+                    }
+                }
+                .onDelete(perform: deleteItems)
+            }
             .refreshable {
                 viewModel.fetchOpenChannels()
             }
