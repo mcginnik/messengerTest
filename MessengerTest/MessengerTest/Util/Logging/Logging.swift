@@ -32,6 +32,8 @@ struct Logging {
                       functionName: String = #function){
         guard enabled else { return }
         
+        guard loggingLevel != .never else { return }
+        
         if AppConfig.shared.loggingLevel < loggingLevel {
             return
         }

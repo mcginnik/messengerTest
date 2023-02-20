@@ -18,12 +18,12 @@ class MainViewModel: ObservableObject {
     }
     
     init(){
-        loginAndConnectToChat()
+        loginAndStartChatService()
     }
     
     // MARK: API
     
-    private func loginAndConnectToChat(){
+    private func loginAndStartChatService(){
         // Just fake login for now
         login(withEmail: "", password: ""){ [weak self] res in
             switch res {

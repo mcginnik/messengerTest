@@ -36,6 +36,8 @@ class ChannelsViewModel: ObservableObject {
     
     func fetchOpenChannels(){
         ChannelsService.shared.fetchOpenChannels { [weak self] res in
+            // Not sure if we need to remove them all first or not... beyond the scope of this to manage channels
+            self?.channelSet.removeAll()
             switch res {
             case .success(let channels):
                 for channel in channels {

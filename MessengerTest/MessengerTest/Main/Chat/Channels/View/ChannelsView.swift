@@ -10,42 +10,55 @@ import SwiftUI
 struct ChannelsView: View {
 
     @StateObject var viewModel: ChannelsViewModel = ChannelsViewModel()
-    @State var presentChannelNameInput: Bool = false
+    @State var showChannelNameInput: Bool = false
     @State var channelName: String = ""
     
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(viewModel.channels, id: \.self) { item in
-                    NavigationLink {
-                        Text("\(item.id)")
-//                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text("\(item.name)")
-                        //Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                    .onAppear {
-                        if item == viewModel.channels.last {
-                            viewModel.loadNextPage()
-                        }
-                    }
-                }
-                .onDelete(perform: deleteItems)
+    var toolbarItems: some ToolbarContent {
+        Group {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: showAddChannel) {
-                        Label(StringConstants.addItem, systemImage: "plus")
-                    }
+            ToolbarItem {
+                Button(action: showAddChannel) {
+                    Label(StringConstants.addItem, systemImage: "plus")
                 }
             }
         }
-        .alert(StringConstants.newChannel, isPresented: $presentChannelNameInput, actions: {
+    }
+    
+    var channelsList: some View {
+        List {
+            ForEach(viewModel.channels, id: \.self) { item in
+                NavigationLink {
+                    Text("\(item.id)")
+//                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                } label: {
+                    Text("\(item.name)")
+                    //Text(item.timestamp!, formatter: itemFormatter)
+                }
+                .onAppear {
+                    if item == viewModel.channels.last {
+                        viewModel.loadNextPage()
+                    }
+                }
+            }
+            .onDelete(perform: deleteItems)
+        }
+    }
+    
+    var body: some View {
+        NavigationView {
+            channelsList
+            .refreshable {
+                viewModel.fetchOpenChannels()
+            }
+            .toolbar {
+                toolbarItems
+            }
+        }
+
+        .alert(StringConstants.newChannel, isPresented: $showChannelNameInput, actions: {
             TextField(StringConstants.channelName, text: $channelName)
-            
             Button(StringConstants.createChannelCTA, action: addItem)
             Button(StringConstants.cancelCTA, role: .cancel, action: {})
         }, message: {
@@ -54,7 +67,7 @@ struct ChannelsView: View {
     }
     
     private func showAddChannel(){
-        presentChannelNameInput.toggle()
+        showChannelNameInput.toggle()
     }
 
     private func addItem() {
