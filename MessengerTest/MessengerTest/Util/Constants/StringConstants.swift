@@ -19,4 +19,6 @@ struct StringConstants {
     static let createChannelCTA: String = "Create \(channel)"
     static let createChannelDescription: String = "Give your \(channel.lowercased()) a name..."
     static let cancelCTA: String = "Cancel"
+    
+    static let loading = "Loading..."
 }

@@ -10,12 +10,16 @@ import Combine
 
 class ChannelsViewModel: ObservableObject {
     
-    @Published var channels: [Channel] = []
+    @Published private(set) var channels: [Channel] = []
     
-    var channelSet: Set<Channel> = [] {
+    private var channelSet: Set<Channel> = [] {
         didSet {
             channels = Array(channelSet).sorted()
         }
+    }
+    
+    init() {
+        fetchOpenChannels()
     }
     
     func createChannel(withName name: String) {

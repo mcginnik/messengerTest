@@ -14,45 +14,16 @@ struct MessengerTestApp: App {
     
     init() {
         injectServices()
-        loginAndConnectToChat()
     }
     
     // MARK: Views
     
     var body: some Scene {
         WindowGroup {
-            ChannelsView()
+            MainView()
         }
     }
     
-    // MARK: API
-    
-    private func loginAndConnectToChat(){
-        // Just fake login for now
-        login(withEmail: "", password: ""){ res in
-            switch res {
-            case .success(let userID):
-                startChatService(withUserID: userID)
-            case .failure(let error):
-                Logging.LogMe("Failed! ... \(error)")
-            }
-        }
-    }
-    
-    private func login(withEmail email: String, password: String, completion: @escaping (Result<UserID, Error>) -> Void) {
-        AuthService.shared.login(withEmail: email, password: password, completion: completion)
-    }
-    
-    private func startChatService(withUserID userID: UserID){
-        ChatService.shared.initialize(userID: userID) { res in
-            switch res {
-            case .success:
-                Logging.LogMe("Success! ... withUser: \(userID)")
-            case .failure(let error):
-                assertionFailure("\(error)")
-            }
-        }
-    }
 }
 
 // MARK: Dependency Injection of services
