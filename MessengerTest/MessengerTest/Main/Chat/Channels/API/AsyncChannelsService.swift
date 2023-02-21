@@ -9,10 +9,11 @@ import Foundation
 import Combine
 
 protocol AsyncChannelsServiceProtocol {
-    func createChannel(withName name: String) async throws -> Channel
-    func deleteChannel(withURL url: ChannelURL) async throws -> Void
-    func fetchOpenChannels() async throws -> [Channel]
-    func loadNextPage() async throws -> [Channel]
+    func createChannel(withName name: String,
+                       type: ChannelType) async throws -> Channel
+    func deleteChannel(_ channel: Channel) async throws -> Void
+    func fetchChannels(forType type: ChannelType) async throws -> [Channel]
+    func loadNextPage(forType type: ChannelType) async throws -> [Channel]
 }
 
 class AsyncChannelsService: AsyncChannelsServiceProtocol {
@@ -27,9 +28,10 @@ class AsyncChannelsService: AsyncChannelsServiceProtocol {
     
     // MARK: API
     
-    func createChannel(withName name: String) async throws -> Channel {
+    func createChannel(withName name: String,
+                       type: ChannelType) async throws -> Channel {
         let future = Future<Channel, Error> { promise in
-            ChannelsService.shared.createChannel(withName: name) { res in
+            ChannelsService.shared.createChannel(withName: name, type: type) { res in
                 switch res {
                 case .success(let data):
                     return promise(.success(data))
@@ -44,9 +46,9 @@ class AsyncChannelsService: AsyncChannelsServiceProtocol {
         return res
     }
     
-    func deleteChannel(withURL url: ChannelURL) async throws {
+    func deleteChannel(_ channel: Channel) async throws -> Void {
         let future = Future<Void, Error> { promise in
-            ChannelsService.shared.deleteChannel(withURL: url) { res in
+            ChannelsService.shared.deleteChannel(channel) { res in
                 switch res {
                 case .success:
                     return promise(.success(()))
@@ -60,9 +62,9 @@ class AsyncChannelsService: AsyncChannelsServiceProtocol {
         try await future.async()
     }
     
-    func fetchOpenChannels() async throws -> [Channel] {
+    func fetchChannels(forType type: ChannelType) async throws -> [Channel] {
         let future = Future<[Channel], Error> { promise in
-            ChannelsService.shared.fetchOpenChannels() { res in
+            ChannelsService.shared.fetchChannels(forType: type) { res in
                 switch res {
                 case .success(let data):
                     return promise(.success(data))
@@ -77,9 +79,9 @@ class AsyncChannelsService: AsyncChannelsServiceProtocol {
         return res
     }
     
-    func loadNextPage() async throws -> [Channel] {
+    func loadNextPage(forType type: ChannelType) async throws -> [Channel] {
         let future = Future<[Channel], Error> { promise in
-            ChannelsService.shared.loadNextPage() { res in
+            ChannelsService.shared.loadNextPage(forType: type) { res in
                 switch res {
                 case .success(let data):
                     return promise(.success(data))

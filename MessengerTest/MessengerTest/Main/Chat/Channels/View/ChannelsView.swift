@@ -23,6 +23,14 @@ struct ChannelsView: View {
                     Label(StringConstants.addItem, systemImage: "plus")
                 }
             }
+            ToolbarItem(placement: .navigationBarLeading) {
+                Picker("", selection: $viewModel.channelType) {
+                    ForEach(ChannelType.allCases, id: \.self) { filter in
+                        Text(filter.descriptionCTA)
+                            .padding()
+                    }
+                }
+            }
         }
     }
     
@@ -43,7 +51,7 @@ struct ChannelsView: View {
             }
             .refreshable {
                 Task {
-                    await viewModel.fetchOpenChannels()
+                    await viewModel.fetchChannels()
                 }
             }
             .toolbar {

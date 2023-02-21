@@ -11,6 +11,13 @@ import Combine
 class ChannelsViewModel: ObservableObject {
     
     @Published private(set) var channels: [Channel] = []
+    @Published var channelType: ChannelType = .group {
+        didSet {
+            Task {
+                await fetchChannels()
+            }
+        }
+    }
     
     private var channelSet: Set<Channel> = [] {
         didSet {
@@ -20,23 +27,23 @@ class ChannelsViewModel: ObservableObject {
     
     init() {
         Task {
-            await fetchOpenChannels()
+            await fetchChannels()
         }
     }
     
     func createChannel(withName name: String) async {
         do {
-            _ = try await AsyncChannelsService.shared.createChannel(withName: name)
-            await self.fetchOpenChannels()
+            _ = try await AsyncChannelsService.shared.createChannel(withName: name, type: channelType)
+            await self.fetchChannels()
         } catch {
             Logging.LogMe("Failed!... \(error)")
         }
     }
     
     @MainActor
-    func fetchOpenChannels() async {
+    func fetchChannels() async {
         do {
-            let channels = try await AsyncChannelsService.shared.fetchOpenChannels()
+            let channels = try await AsyncChannelsService.shared.fetchChannels(forType: channelType)
             removeAllChannels()
             insertChannels(channels)
         } catch {
@@ -47,7 +54,7 @@ class ChannelsViewModel: ObservableObject {
     @MainActor
     func loadNextPage() async {
         do {
-            let channels = try await AsyncChannelsService.shared.loadNextPage()
+            let channels = try await AsyncChannelsService.shared.loadNextPage(forType: channelType)
             insertChannels(channels)
         } catch {
             Logging.LogMe("Failed!... \(error)")
@@ -67,7 +74,7 @@ class ChannelsViewModel: ObservableObject {
     
     private func deleteChannel(_ channel: Channel) async {
         do {
-            try await AsyncChannelsService.shared.deleteChannel(withURL: channel.url)
+            try await AsyncChannelsService.shared.deleteChannel(channel)
         } catch {
             Logging.LogMe("Failed!  Deleting channel: \(channel.id), error \(error)")
         }

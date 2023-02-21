@@ -27,6 +27,6 @@ struct ChannelRow: View {
 
 struct ChannelRow_Previews: PreviewProvider {
     static var previews: some View {
-        ChannelRow(channel: .init(id: "", url: "", createdAt: 0, name: "Test"))
+        ChannelRow(channel: .init(id: "", url: "", type: .open, createdAt: 0, name: "Test"))
     }
 }

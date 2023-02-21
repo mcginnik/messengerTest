@@ -21,4 +21,8 @@ struct StringConstants {
     static let cancelCTA: String = "Cancel"
     
     static let loading = "Loading..."
+    
+    static let openChannelsCTA = "Open \(channel)s"
+    static let groupChannelsCTA = "Group \(channel)s"
+
 }
