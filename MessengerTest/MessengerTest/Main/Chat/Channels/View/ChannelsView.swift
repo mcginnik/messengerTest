@@ -9,10 +9,14 @@ import SwiftUI
 
 struct ChannelsView: View {
 
+    // MARK: Properties
+    
     @StateObject var viewModel: ChannelsViewModel = ChannelsViewModel()
     @State var showChannelNameInput: Bool = false
     @State var channelName: String = ""
     
+    // MARK: Views
+
     var toolbarItems: some ToolbarContent {
         Group {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -67,6 +71,8 @@ struct ChannelsView: View {
             Text(StringConstants.createChannelDescription)
         })
     }
+    
+    // MARK: Actions
     
     private func showAddChannel(){
         showChannelNameInput.toggle()

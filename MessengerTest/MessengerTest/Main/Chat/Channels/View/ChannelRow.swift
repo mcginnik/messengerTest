@@ -9,11 +9,15 @@ import SwiftUI
 
 struct ChannelRow: View {
     
+    // MARK: Properties
+
     let channel: Channel
     
+    // MARK: Views
+
     var body: some View {
         NavigationLink {
-            Text("\(channel.name)")
+            MessagesView(channel: channel)
         } label: {
             HStack {
                 Text("\(channel.name)")
@@ -27,6 +31,6 @@ struct ChannelRow: View {
 
 struct ChannelRow_Previews: PreviewProvider {
     static var previews: some View {
-        ChannelRow(channel: .init(id: "", url: "", type: .open, createdAt: 0, name: "Test"))
+        ChannelRow(channel: Channel.getTestChannel())
     }
 }

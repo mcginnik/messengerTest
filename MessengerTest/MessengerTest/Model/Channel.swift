@@ -37,4 +37,7 @@ struct Channel: Identifiable, Hashable, Comparable {
     let createdAt: Int64
     let name: String
     
+    static func getTestChannel() -> Channel {
+        .init(id: "", url: "", type: .open, createdAt: 0, name: "Test Channel")
+    }
 }
