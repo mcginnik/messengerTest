@@ -55,7 +55,7 @@ class SendbirdChatService: ChatServiceProtocol {
         }
     }
     
-    func deinitialize() {
+    func deinitialize(completion: @escaping (Result<Void, Error>) -> Void) {
         //
     }
     

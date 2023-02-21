@@ -39,14 +39,18 @@ struct ChannelsView: View {
                     }
                     .onAppear {
                         if item == viewModel.channels.last {
-                            viewModel.loadNextPage()
+                            Task {
+                                await viewModel.loadNextPage()
+                            }
                         }
                     }
                 }
                 .onDelete(perform: deleteItems)
             }
             .refreshable {
-                viewModel.fetchOpenChannels()
+                Task {
+                    await viewModel.fetchOpenChannels()
+                }
             }
             .toolbar {
                 toolbarItems
@@ -67,14 +71,14 @@ struct ChannelsView: View {
     }
 
     private func addItem() {
-        withAnimation {
-            viewModel.createChannel(withName: channelName)
+        Task {
+            await viewModel.createChannel(withName: channelName)
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            viewModel.deleteChannels(at: offsets)
+        Task {
+            await viewModel.deleteChannels(at: offsets)
         }
     }
 }

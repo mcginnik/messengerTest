@@ -9,7 +9,7 @@ import Foundation
 
 protocol ChatServiceProtocol {
     func initialize(userID: UserID, completion: @escaping (Result<Void, Error>) -> Void)
-    func deinitialize()
+    func deinitialize(completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 enum ChatServiceError: LocalizedError {
@@ -47,6 +47,21 @@ class ChatService {
     func initialize(userID: UserID, completion: @escaping (Result<Void, Error>) -> Void) {
         Logging.LogMe("...")
         injected?.initialize(userID: userID) { res in
+            DispatchQueue.main.async {
+                switch res {
+                case .success:
+                    Logging.LogMe("Success!...")
+                case .failure(let error):
+                    Logging.LogMe("Failed! ... \(error)")
+                }
+                completion(res)
+            }
+        }
+    }
+    
+    func deinitialize(completion: @escaping (Result<Void, Error>) -> Void) {
+        Logging.LogMe("...")
+        injected?.deinitialize() { res in
             DispatchQueue.main.async {
                 switch res {
                 case .success:

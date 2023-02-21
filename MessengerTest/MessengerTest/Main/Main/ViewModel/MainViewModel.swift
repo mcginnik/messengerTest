@@ -18,36 +18,22 @@ class MainViewModel: ObservableObject {
     }
     
     init(){
-        loginAndStartChatService()
+        Task {
+            await loginAndStartChatService()
+        }
     }
     
     // MARK: API
     
-    private func loginAndStartChatService(){
+    @MainActor
+    private func loginAndStartChatService() async {
         // Just fake login for now
-        login(withEmail: "", password: ""){ [weak self] res in
-            switch res {
-            case .success(let userID):
-                self?.startChatService(withUserID: userID)
-            case .failure(let error):
-                Logging.LogMe("Failed! ... \(error)")
+            do {
+                let userID = try await AsyncAuthService.shared.login(withEmail: "", password: "")
+                try await AsyncChatService.shared.initialize(userID: userID)
+                self.isAuthenticated = true
+            } catch {
+                Logging.LogMe("Failed!...")
             }
-        }
-    }
-    
-    private func login(withEmail email: String, password: String, completion: @escaping (Result<UserID, Error>) -> Void) {
-        AuthService.shared.login(withEmail: email, password: password, completion: completion)
-    }
-    
-    private func startChatService(withUserID userID: UserID){
-        ChatService.shared.initialize(userID: userID) { [weak self] res in
-            switch res {
-            case .success:
-                Logging.LogMe("Success! ... withUser: \(userID)")
-                self?.isAuthenticated = true
-            case .failure(let error):
-                assertionFailure("\(error)")
-            }
-        }
     }
 }
