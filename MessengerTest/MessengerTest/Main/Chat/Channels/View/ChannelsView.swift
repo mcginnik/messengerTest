@@ -30,20 +30,14 @@ struct ChannelsView: View {
         NavigationView {
             List {
                 ForEach(viewModel.channels, id: \.self) { item in
-                    NavigationLink {
-                        Text("\(item.id)")
-    //                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text("\(item.name)")
-                        //Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                    .onAppear {
-                        if item == viewModel.channels.last {
-                            Task {
-                                await viewModel.loadNextPage()
+                    ChannelRow(channel: item)
+                        .onAppear {
+                            if item == viewModel.channels.last {
+                                Task {
+                                    await viewModel.loadNextPage()
+                                }
                             }
                         }
-                    }
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -82,13 +76,6 @@ struct ChannelsView: View {
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ChannelsView_Previews: PreviewProvider {
     static var previews: some View {
