@@ -24,5 +24,8 @@ struct StringConstants {
     
     static let openChannelsCTA = "Open \(channel)s"
     static let groupChannelsCTA = "Group \(channel)s"
+    
+    static let textInputPlaceholder = "Write something ..."
+
 
 }

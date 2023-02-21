@@ -55,7 +55,76 @@ class SendbirdChannelsService: ChannelsServiceProtocol {
         }
     }
     
+    func fetchChannel(withURL url: String,
+                      type: ChannelType,
+                      completion: @escaping (Result<Channel, Error>) -> Void) {
+        switch type {
+        case .open:
+            Self.fetchOpenChannel(withURL: url) { res in
+                switch res {
+                case .success(let channel):
+                    completion(.success(Channel(id: channel.id, url: channel.channelURL, type: .open, createdAt: channel.createdAt, name: channel.name)))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        case .group:
+            Self.fetchGroupChannel(withURL: url) { res in
+                switch res {
+                case .success(let channel):
+                    completion(.success(Channel(id: channel.id, url: channel.channelURL, type: .group, createdAt: channel.createdAt, name: channel.name)))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func enterChannel(_ channel: Channel, completion: @escaping (Result<Void, Error>) -> Void ) {
+        switch channel.type {
+        case .open:
+            enterOpenChannel(withURL: channel.url, completion: completion)
+        case .group:
+            enterGroupChannel(withURL: channel.url, completion: completion)
+        }
+    }
+    
+    
     // MARK: API Helpers
+    
+    private func enterOpenChannel(withURL url: ChannelURL,
+                                  completion: @escaping (Result<Void, Error>) -> Void) {
+        Self.fetchOpenChannel(withURL: url) { res in
+            switch res {
+            case .success(let channel):
+                channel.enter { error in
+                    if let error = error {
+                        completion(.failure(error))
+                    }
+                    completion(.success(()))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func enterGroupChannel(withURL url: ChannelURL,
+                                    completion: @escaping (Result<Void, Error>) -> Void) {
+        Self.fetchGroupChannel(withURL: url) { res in
+            switch res {
+            case .success(let channel):
+                channel.enter { error in
+                    if let error = error {
+                        completion(.failure(error))
+                    }
+                    completion(.success(()))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     
     private func createOpenChannel(withName name: String,
                                    userID: UserID,
@@ -117,7 +186,7 @@ class SendbirdChannelsService: ChannelsServiceProtocol {
     }
     
     private func deleteOpenChannel(withURL url: ChannelURL, completion: @escaping (Result<Void, Error>) -> Void) {
-        fetchOpenChannel(withURL: url) { res in
+        Self.fetchOpenChannel(withURL: url) { res in
             switch res {
             case .success(let channel):
                 channel.delete { error in
@@ -134,7 +203,7 @@ class SendbirdChannelsService: ChannelsServiceProtocol {
     }
     
     private func deleteGroupChannel(withURL url: ChannelURL, completion: @escaping (Result<Void, Error>) -> Void) {
-        fetchGroupChannel(withURL: url) { res in
+        Self.fetchGroupChannel(withURL: url) { res in
             switch res {
             case .success(let channel):
                 channel.delete { error in
@@ -150,7 +219,7 @@ class SendbirdChannelsService: ChannelsServiceProtocol {
         }
     }
     
-    private func fetchOpenChannel(withURL url: String, completion: @escaping (Result<OpenChannel, Error>) -> Void){
+    static func fetchOpenChannel(withURL url: String, completion: @escaping (Result<OpenChannel, Error>) -> Void){
         OpenChannel.getChannel(url: url) { channel, error in
             if let error = error {
                 completion(.failure(error))
@@ -164,7 +233,7 @@ class SendbirdChannelsService: ChannelsServiceProtocol {
         }
     }
     
-    private func fetchGroupChannel(withURL url: String, completion: @escaping (Result<GroupChannel, Error>) -> Void){
+    static func fetchGroupChannel(withURL url: String, completion: @escaping (Result<GroupChannel, Error>) -> Void){
         GroupChannel.getChannel(url: url) { channel, error in
             if let error = error {
                 completion(.failure(error))
@@ -229,8 +298,22 @@ class SendbirdChannelsService: ChannelsServiceProtocol {
                 params.limit = 15
             }
         }
-
     }
     
     
 }
+
+protocol SendbirdChannelProtocol {
+    func enter(completionHandler: SBErrorHandler?)
+    func sendUserMessage(params: UserMessageCreateParams, completionHandler: SendbirdChatSDK.UserMessageHandler?) -> SendbirdChatSDK.UserMessage
+}
+
+extension GroupChannel: SendbirdChannelProtocol {
+    func enter(completionHandler: SBErrorHandler?) {
+        join(completionHandler: completionHandler)
+    }
+    
+}
+extension OpenChannel: SendbirdChannelProtocol {}
+
+

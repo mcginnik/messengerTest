@@ -12,16 +12,27 @@ protocol MessagesServiceProtocol {
 //    func deleteChannel(withURL url: ChannelURL, completion: @escaping (Result<Void, Error>) -> Void)
 //    func fetchOpenChannels(completion: @escaping (Result<[Channel], Error>) -> Void)
 //    func loadNextPage(completion: @escaping (Result<[Channel], Error>) -> Void )
-    func sendMessage(_ text: String, channel: Channel, completion: @escaping (Result<ChatMessage, Error>) -> Void)
+    func sendMessage(withText text: String,
+                     channel: Channel,
+                     completion: @escaping (Result<ChatMessage, Error>) -> Void)
+    func startMessagesConnection(channel: Channel,
+                                 didUpdate: @escaping (Result<ChatMessage, Error>) -> Void)
+    func removeMessagesConnection(channel: Channel, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 enum MessagesServiceError: LocalizedError {
     case emptyData
+    case nilChannel
+    case wrongChannel
 
     var errorDescription: String? {
         switch self {
         case .emptyData:
             return "Message data is empty..."
+        case .nilChannel:
+            return "Channel is nil..."
+        case .wrongChannel:
+            return "Wrong channel for updates"
         }
     }
 }
@@ -47,19 +58,52 @@ class MessagesService {
     
     // MARK: API
     
-    func sendMessage(_ text: String, channel: Channel, completion: @escaping (Result<ChatMessage, Error>) -> Void) {
+    func sendMessage(withText text: String,
+                     channel: Channel,
+                     completion: @escaping (Result<ChatMessage, Error>) -> Void) {
         Logging.LogMe("...")
-//        injected?.createChannel(withName: channel.name) { res in
-//            DispatchQueue.main.async {
-//                switch res {
-//                case .success:
-//                    Logging.LogMe("Success!...")
-//                case .failure(let error):
-//                    Logging.LogMe("Failed! ... \(error)")
-//                }
-//                completion(res)
-//            }
-//        }
+        injected?.sendMessage(withText: text, channel: channel) { res in
+            DispatchQueue.main.async {
+                switch res {
+                case .success:
+                    Logging.LogMe("Success!...")
+                case .failure(let error):
+                    Logging.LogMe("Failed! ... \(error)")
+                }
+                completion(res)
+            }
+        }
+    }
+    
+    func startMessagesConnection(channel: Channel,
+                                 didUpdate: @escaping (Result<ChatMessage, Error>) -> Void) {
+        Logging.LogMe("...")
+        injected?.startMessagesConnection(channel: channel) { res in
+            DispatchQueue.main.async {
+                switch res {
+                case .success:
+                    Logging.LogMe("Success!...")
+                case .failure(let error):
+                    Logging.LogMe("Failed! ... \(error)")
+                }
+                didUpdate(res)
+            }
+        }
+    }
+    
+    func removeMessagesConnection(channel: Channel, completion: @escaping (Result<Void, Error>) -> Void) {
+        Logging.LogMe("...")
+        injected?.removeMessagesConnection(channel: channel) { res in
+            DispatchQueue.main.async {
+                switch res {
+                case .success:
+                    Logging.LogMe("Success!...")
+                case .failure(let error):
+                    Logging.LogMe("Failed! ... \(error)")
+                }
+                completion(res)
+            }
+        }
     }
     
 //    func deleteChannel(withURL url: ChannelURL, completion: @escaping (Result<Void, Error>) -> Void) {

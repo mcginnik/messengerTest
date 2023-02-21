@@ -11,7 +11,7 @@ import Combine
 class ChannelsViewModel: ObservableObject {
     
     @Published private(set) var channels: [Channel] = []
-    @Published var channelType: ChannelType = .group {
+    @Published var channelType: ChannelType = .open {
         didSet {
             Task {
                 await fetchChannels()
