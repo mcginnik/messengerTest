@@ -8,19 +8,25 @@
 import Foundation
 
 protocol ChannelsServiceProtocol {
-    func createChannel(withName name: String, completion: @escaping (Result<Channel, Error>) -> Void)
-    func deleteChannel(withURL url: ChannelURL, completion: @escaping (Result<Void, Error>) -> Void)
-    func fetchOpenChannels(completion: @escaping (Result<[Channel], Error>) -> Void)
-    func loadNextPage(completion: @escaping (Result<[Channel], Error>) -> Void )
+    func createChannel(withName name: String,
+                       type: ChannelType,
+                       completion: @escaping (Result<Channel, Error>) -> Void)
+    func deleteChannel(_ channel: Channel, completion: @escaping (Result<Void, Error>) -> Void)
+    func fetchChannels(forType type: ChannelType, completion: @escaping (Result<[Channel], Error>) -> Void)
+    func loadNextPage(forType type: ChannelType, completion: @escaping (Result<[Channel], Error>) -> Void )
+    func enterChannel(_ channel: Channel, completion: @escaping (Result<Void, Error>) -> Void )
 }
 
 enum ChannelsServiceError: LocalizedError {
     case emptyData
+    case emptyChannelParams
 
     var errorDescription: String? {
         switch self {
         case .emptyData:
-            return "Channel data is empty..."
+            return "Channel data is empty... can't decode..."
+        case .emptyChannelParams:
+            return "Channel params are empty...  Can't continue..."
         }
     }
 }
@@ -46,9 +52,11 @@ class ChannelsService {
     
     // MARK: API
     
-    func createChannel(withName name: String, completion: @escaping (Result<Channel, Error>) -> Void) {
+    func createChannel(withName name: String,
+                       type: ChannelType,
+                       completion: @escaping (Result<Channel, Error>) -> Void) {
         Logging.LogMe("...")
-        injected?.createChannel(withName: name) { res in
+        injected?.createChannel(withName: name, type: type) { res in
             DispatchQueue.main.async {
                 switch res {
                 case .success:
@@ -61,9 +69,9 @@ class ChannelsService {
         }
     }
     
-    func deleteChannel(withURL url: ChannelURL, completion: @escaping (Result<Void, Error>) -> Void) {
+    func deleteChannel(_ channel: Channel, completion: @escaping (Result<Void, Error>) -> Void) {
         Logging.LogMe("...")
-        injected?.deleteChannel(withURL: url) { res in
+        injected?.deleteChannel(channel) { res in
             DispatchQueue.main.async {
                 switch res {
                 case .success:
@@ -76,9 +84,9 @@ class ChannelsService {
         }
     }
     
-    func fetchOpenChannels(completion: @escaping (Result<[Channel], Error>) -> Void ) {
+    func fetchChannels(forType type: ChannelType, completion: @escaping (Result<[Channel], Error>) -> Void ) {
         Logging.LogMe("...")
-        injected?.fetchOpenChannels { res in
+        injected?.fetchChannels(forType: type) { res in
             DispatchQueue.main.async {
                 switch res {
                 case .success:
@@ -91,9 +99,24 @@ class ChannelsService {
         }
     }
     
-    func loadNextPage(completion: @escaping (Result<[Channel], Error>) -> Void ) {
+    func loadNextPage(forType type: ChannelType, completion: @escaping (Result<[Channel], Error>) -> Void ) {
         Logging.LogMe("...")
-        injected?.loadNextPage { res in
+        injected?.loadNextPage(forType: type) { res in
+            DispatchQueue.main.async {
+                switch res {
+                case .success:
+                    Logging.LogMe("Success!...")
+                case .failure(let error):
+                    Logging.LogMe("Failed! ... \(error)")
+                }
+                completion(res)
+            }
+        }
+    }
+    
+    func enterChannel(_ channel: Channel, completion: @escaping (Result<Void, Error>) -> Void ) {
+        Logging.LogMe("...")
+        injected?.enterChannel(channel) { res in
             DispatchQueue.main.async {
                 switch res {
                 case .success:

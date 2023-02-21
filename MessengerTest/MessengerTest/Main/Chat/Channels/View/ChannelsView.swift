@@ -9,10 +9,14 @@ import SwiftUI
 
 struct ChannelsView: View {
 
+    // MARK: Properties
+    
     @StateObject var viewModel: ChannelsViewModel = ChannelsViewModel()
     @State var showChannelNameInput: Bool = false
     @State var channelName: String = ""
     
+    // MARK: Views
+
     var toolbarItems: some ToolbarContent {
         Group {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -23,34 +27,36 @@ struct ChannelsView: View {
                     Label(StringConstants.addItem, systemImage: "plus")
                 }
             }
-        }
-    }
-    
-    var channelsList: some View {
-        List {
-            ForEach(viewModel.channels, id: \.self) { item in
-                NavigationLink {
-                    Text("\(item.id)")
-//                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                } label: {
-                    Text("\(item.name)")
-                    //Text(item.timestamp!, formatter: itemFormatter)
-                }
-                .onAppear {
-                    if item == viewModel.channels.last {
-                        viewModel.loadNextPage()
+            ToolbarItem(placement: .navigationBarLeading) {
+                Picker("", selection: $viewModel.channelType) {
+                    ForEach(ChannelType.allCases, id: \.self) { filter in
+                        Text(filter.descriptionCTA)
+                            .padding()
                     }
                 }
             }
-            .onDelete(perform: deleteItems)
         }
     }
     
     var body: some View {
         NavigationView {
-            channelsList
+            List {
+                ForEach(viewModel.channels, id: \.self) { item in
+                    ChannelRow(channel: item)
+                        .onAppear {
+                            if item == viewModel.channels.last {
+                                Task {
+                                    await viewModel.loadNextPage()
+                                }
+                            }
+                        }
+                }
+                .onDelete(perform: deleteItems)
+            }
             .refreshable {
-                viewModel.fetchOpenChannels()
+                Task {
+                    await viewModel.fetchChannels()
+                }
             }
             .toolbar {
                 toolbarItems
@@ -66,29 +72,24 @@ struct ChannelsView: View {
         })
     }
     
+    // MARK: Actions
+    
     private func showAddChannel(){
         showChannelNameInput.toggle()
     }
 
     private func addItem() {
-        withAnimation {
-            viewModel.createChannel(withName: channelName)
+        Task {
+            await viewModel.createChannel(withName: channelName)
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            viewModel.deleteChannels(at: offsets)
+        Task {
+            await viewModel.deleteChannels(at: offsets)
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ChannelsView_Previews: PreviewProvider {
     static var previews: some View {

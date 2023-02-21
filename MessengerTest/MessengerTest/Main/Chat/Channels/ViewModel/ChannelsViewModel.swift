@@ -11,6 +11,13 @@ import Combine
 class ChannelsViewModel: ObservableObject {
     
     @Published private(set) var channels: [Channel] = []
+    @Published var channelType: ChannelType = .open {
+        didSet {
+            Task {
+                await fetchChannels()
+            }
+        }
+    }
     
     private var channelSet: Set<Channel> = [] {
         didSet {
@@ -19,74 +26,69 @@ class ChannelsViewModel: ObservableObject {
     }
     
     init() {
-        fetchOpenChannels()
-    }
-    
-    func createChannel(withName name: String) {
-        ChannelsService.shared.createChannel(withName: name) { [weak self] res in
-            switch res {
-            case .success(_):
-                Logging.LogMe("Successfully created channel")
-                self?.fetchOpenChannels()
-            case .failure(let error):
-                Logging.LogMe("Failed!... \(error)")
-            }
+        Task {
+            await fetchChannels()
         }
     }
     
-    func fetchOpenChannels(){
-        ChannelsService.shared.fetchOpenChannels { [weak self] res in
-            // Not sure if we need to remove them all first or not... beyond the scope of this to manage channels
-            self?.channelSet.removeAll()
-            switch res {
-            case .success(let channels):
-                for channel in channels {
-                    self?.channelSet.insert(channel)
-                }
-                Logging.LogMe("Success!.. adding channels \(channels)")
-            case .failure(let error):
-                Logging.LogMe("Failed!... \(error)")
-            }
+    func createChannel(withName name: String) async {
+        do {
+            _ = try await AsyncChannelsService.shared.createChannel(withName: name, type: channelType)
+            await self.fetchChannels()
+        } catch {
+            Logging.LogMe("Failed!... \(error)")
         }
     }
     
-    func loadNextPage(){
-        ChannelsService.shared.loadNextPage { [weak self] res in
-            switch res {
-            case .success(let channels):
-                for channel in channels {
-                    self?.channelSet.insert(channel)
-                }
-                Logging.LogMe("Success!.. adding channels \(channels)")
-            case .failure(let error):
-                Logging.LogMe("Failed!... \(error)")
-            }
+    @MainActor
+    func fetchChannels() async {
+        do {
+            let channels = try await AsyncChannelsService.shared.fetchChannels(forType: channelType)
+            removeAllChannels()
+            insertChannels(channels)
+        } catch {
+            Logging.LogMe("Failed!... \(error)")
         }
     }
     
-    func deleteChannels(at indices: IndexSet){
+    @MainActor
+    func loadNextPage() async {
+        do {
+            let channels = try await AsyncChannelsService.shared.loadNextPage(forType: channelType)
+            insertChannels(channels)
+        } catch {
+            Logging.LogMe("Failed!... \(error)")
+        }
+    }
+    
+    @MainActor
+    func deleteChannels(at indices: IndexSet) async {
         for index in indices {
             let channel = channels[index]
-            deleteChannel(channel) { [weak self] res in
-                switch res {
-                case .success:
-                    self?.channelSet.remove(channel)
-                case .failure:
-                    Logging.LogMe("Failed... couldn't delete channels!")
-                }
+            do {
+                await deleteChannel(channel)
+                self.channelSet.remove(channel)
             }
         }
     }
     
-    private func deleteChannel(_ channel: Channel, completion: @escaping (Result<Void, Error>) -> Void) {
-        ChannelsService.shared.deleteChannel(withURL: channel.url) { res in
-            switch res {
-            case .success:
-                Logging.LogMe("Success!  Deleted channel: \(channel.id)")
-            case .failure(let error):
-                Logging.LogMe("Failed!  Deleting channel: \(channel.id), error \(error)")
-            }
-            completion(res)
+    private func deleteChannel(_ channel: Channel) async {
+        do {
+            try await AsyncChannelsService.shared.deleteChannel(channel)
+        } catch {
+            Logging.LogMe("Failed!  Deleting channel: \(channel.id), error \(error)")
+        }
+    }
+    
+    // MARK: Helpers
+    
+    private func removeAllChannels(){
+        self.channelSet.removeAll()
+    }
+    
+    private func insertChannels(_ channels: [Channel]) {
+        for channel in channels {
+            self.channelSet.insert(channel)
         }
     }
     

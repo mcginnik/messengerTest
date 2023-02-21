@@ -30,6 +30,28 @@
 		A7766DF329A408A800E842ED /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DF229A408A800E842ED /* LoadingView.swift */; };
 		A7766DF829A40BC300E842ED /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DF729A40BC300E842ED /* MainView.swift */; };
 		A7766DFA29A40BCF00E842ED /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DF929A40BCF00E842ED /* MainViewModel.swift */; };
+		A7766DFD29A45E2000E842ED /* AsyncAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766DFC29A45E2000E842ED /* AsyncAuthService.swift */; };
+		A7766E0129A464E800E842ED /* AnyPublisher+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E0029A464E800E842ED /* AnyPublisher+Async.swift */; };
+		A7766E0329A465FD00E842ED /* AsyncChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E0229A465FD00E842ED /* AsyncChatService.swift */; };
+		A7766E0529A4690200E842ED /* AsyncChannelsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E0429A4690200E842ED /* AsyncChannelsService.swift */; };
+		A7766E0729A470C700E842ED /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E0629A470C700E842ED /* MessagesView.swift */; };
+		A7766E0929A470D000E842ED /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E0829A470D000E842ED /* MessagesViewModel.swift */; };
+		A7766E0B29A470D900E842ED /* MessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E0A29A470D900E842ED /* MessagesService.swift */; };
+		A7766E0E29A470F100E842ED /* SendbirdMessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E0D29A470F100E842ED /* SendbirdMessagesService.swift */; };
+		A7766E1129A4714700E842ED /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E1029A4714700E842ED /* Format.swift */; };
+		A7766E1329A4723C00E842ED /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E1229A4723C00E842ED /* Date+Extensions.swift */; };
+		A7766E1529A4735C00E842ED /* ChannelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E1429A4735C00E842ED /* ChannelRow.swift */; };
+		A7766E1A29A5211A00E842ED /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E1929A5211A00E842ED /* Color+Extensions.swift */; };
+		A7766E1C29A5229500E842ED /* ImageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E1B29A5229500E842ED /* ImageConstants.swift */; };
+		A7766E1E29A5236400E842ED /* MessagesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E1D29A5236400E842ED /* MessagesGridView.swift */; };
+		A7766E2029A5239100E842ED /* KeyboardInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E1F29A5239100E842ED /* KeyboardInputAccessoryView.swift */; };
+		A7766E2229A523C000E842ED /* ChatMessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E2129A523C000E842ED /* ChatMessageBubbleView.swift */; };
+		A7766E2429A5245A00E842ED /* KeyboardObserving.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E2329A5245A00E842ED /* KeyboardObserving.swift */; };
+		A7766E2629A5256600E842ED /* AsyncMessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E2529A5256600E842ED /* AsyncMessagesService.swift */; };
+		A7766E2B29A557AE00E842ED /* SendbirdChannelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E2A29A557AE00E842ED /* SendbirdChannelProtocol.swift */; };
+		A7766E2E29A5605100E842ED /* UserMessage+toChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E2D29A5605100E842ED /* UserMessage+toChatMessage.swift */; };
+		A7766E3229A5619A00E842ED /* OpenChannel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E3129A5619A00E842ED /* OpenChannel+Extensions.swift */; };
+		A7766E3429A561A500E842ED /* GroupChannel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E3329A561A500E842ED /* GroupChannel+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +80,28 @@
 		A7766DF229A408A800E842ED /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		A7766DF729A40BC300E842ED /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A7766DF929A40BCF00E842ED /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		A7766DFC29A45E2000E842ED /* AsyncAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAuthService.swift; sourceTree = "<group>"; };
+		A7766E0029A464E800E842ED /* AnyPublisher+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyPublisher+Async.swift"; sourceTree = "<group>"; };
+		A7766E0229A465FD00E842ED /* AsyncChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncChatService.swift; sourceTree = "<group>"; };
+		A7766E0429A4690200E842ED /* AsyncChannelsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncChannelsService.swift; sourceTree = "<group>"; };
+		A7766E0629A470C700E842ED /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
+		A7766E0829A470D000E842ED /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
+		A7766E0A29A470D900E842ED /* MessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesService.swift; sourceTree = "<group>"; };
+		A7766E0D29A470F100E842ED /* SendbirdMessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendbirdMessagesService.swift; sourceTree = "<group>"; };
+		A7766E1029A4714700E842ED /* Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
+		A7766E1229A4723C00E842ED /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		A7766E1429A4735C00E842ED /* ChannelRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRow.swift; sourceTree = "<group>"; };
+		A7766E1929A5211A00E842ED /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		A7766E1B29A5229500E842ED /* ImageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
+		A7766E1D29A5236400E842ED /* MessagesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesGridView.swift; sourceTree = "<group>"; };
+		A7766E1F29A5239100E842ED /* KeyboardInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInputAccessoryView.swift; sourceTree = "<group>"; };
+		A7766E2129A523C000E842ED /* ChatMessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageBubbleView.swift; sourceTree = "<group>"; };
+		A7766E2329A5245A00E842ED /* KeyboardObserving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserving.swift; sourceTree = "<group>"; };
+		A7766E2529A5256600E842ED /* AsyncMessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncMessagesService.swift; sourceTree = "<group>"; };
+		A7766E2A29A557AE00E842ED /* SendbirdChannelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendbirdChannelProtocol.swift; sourceTree = "<group>"; };
+		A7766E2D29A5605100E842ED /* UserMessage+toChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMessage+toChatMessage.swift"; sourceTree = "<group>"; };
+		A7766E3129A5619A00E842ED /* OpenChannel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenChannel+Extensions.swift"; sourceTree = "<group>"; };
+		A7766E3329A561A500E842ED /* GroupChannel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupChannel+Extensions.swift"; sourceTree = "<group>"; };
 		FB1D765DBBF3999954650E21 /* Pods-MessengerTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessengerTest.debug.xcconfig"; path = "Target Support Files/Pods-MessengerTest/Pods-MessengerTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +160,9 @@
 		A7766D9B29A3CBAC00E842ED /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A7766E1729A5210700E842ED /* Style */,
+				A7766E0F29A4711400E842ED /* Format */,
+				A7766DFE29A464C100E842ED /* Combine */,
 				A7766DEF29A4087C00E842ED /* UI */,
 				A7766DEC29A4028100E842ED /* Constants */,
 				A7766DAC29A3CFB200E842ED /* Logging */,
@@ -167,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				A7766DA629A3CC8900E842ED /* ChannelsView.swift */,
+				A7766E1429A4735C00E842ED /* ChannelRow.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,6 +232,7 @@
 			children = (
 				A7766DE729A3EA7200E842ED /* SendbirdChannelsService */,
 				A7766DE529A3EA6B00E842ED /* ChannelsService.swift */,
+				A7766E0429A4690200E842ED /* AsyncChannelsService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -191,6 +240,8 @@
 		A7766DA329A3CC5E00E842ED /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A7766E2729A5285400E842ED /* Components */,
+				A7766E0629A470C700E842ED /* MessagesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,6 +249,7 @@
 		A7766DA429A3CC6300E842ED /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A7766E0829A470D000E842ED /* MessagesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -205,6 +257,9 @@
 		A7766DA529A3CC6800E842ED /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A7766E0C29A470DD00E842ED /* SendbirdMessagesService */,
+				A7766E0A29A470D900E842ED /* MessagesService.swift */,
+				A7766E2529A5256600E842ED /* AsyncMessagesService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -215,6 +270,7 @@
 				A7766DB529A3D17700E842ED /* ChatConfiguring.swift */,
 				A7766DAB29A3CE9200E842ED /* SendbirdChatService */,
 				A7766DA929A3CE8D00E842ED /* ChatService.swift */,
+				A7766E0229A465FD00E842ED /* AsyncChatService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -247,8 +303,7 @@
 		A7766DB929A3D60900E842ED /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				A7766DBC29A3D7CC00E842ED /* MockAuthService */,
-				A7766DBA29A3D61400E842ED /* AuthService.swift */,
+				A7766DFB29A45E0E00E842ED /* API */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -264,6 +319,7 @@
 		A7766DE029A3EA0A00E842ED /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A7766E2F29A5613200E842ED /* Sendbird */,
 				A7766DE129A3EA1200E842ED /* Channel.swift */,
 				A7766DE329A3EA1900E842ED /* ChatMessage.swift */,
 				A7766DEA29A3FF1000E842ED /* User.swift */,
@@ -283,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				A7766DED29A4028E00E842ED /* StringConstants.swift */,
+				A7766E1B29A5229500E842ED /* ImageConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -290,6 +347,7 @@
 		A7766DEF29A4087C00E842ED /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A7766E2829A5286900E842ED /* Keyboard */,
 				A7766DF229A408A800E842ED /* LoadingView.swift */,
 			);
 			path = UI;
@@ -318,6 +376,102 @@
 				A7766DF929A40BCF00E842ED /* MainViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A7766DFB29A45E0E00E842ED /* API */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DBC29A3D7CC00E842ED /* MockAuthService */,
+				A7766DBA29A3D61400E842ED /* AuthService.swift */,
+				A7766DFC29A45E2000E842ED /* AsyncAuthService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		A7766DFE29A464C100E842ED /* Combine */ = {
+			isa = PBXGroup;
+			children = (
+				A7766DFF29A464DB00E842ED /* Extensions */,
+			);
+			path = Combine;
+			sourceTree = "<group>";
+		};
+		A7766DFF29A464DB00E842ED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A7766E0029A464E800E842ED /* AnyPublisher+Async.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A7766E0C29A470DD00E842ED /* SendbirdMessagesService */ = {
+			isa = PBXGroup;
+			children = (
+				A7766E0D29A470F100E842ED /* SendbirdMessagesService.swift */,
+			);
+			path = SendbirdMessagesService;
+			sourceTree = "<group>";
+		};
+		A7766E0F29A4711400E842ED /* Format */ = {
+			isa = PBXGroup;
+			children = (
+				A7766E1029A4714700E842ED /* Format.swift */,
+				A7766E1229A4723C00E842ED /* Date+Extensions.swift */,
+			);
+			path = Format;
+			sourceTree = "<group>";
+		};
+		A7766E1729A5210700E842ED /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				A7766E1829A5210C00E842ED /* Color */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		A7766E1829A5210C00E842ED /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				A7766E1929A5211A00E842ED /* Color+Extensions.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		A7766E2729A5285400E842ED /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A7766E1D29A5236400E842ED /* MessagesGridView.swift */,
+				A7766E1F29A5239100E842ED /* KeyboardInputAccessoryView.swift */,
+				A7766E2129A523C000E842ED /* ChatMessageBubbleView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A7766E2829A5286900E842ED /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				A7766E2329A5245A00E842ED /* KeyboardObserving.swift */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		A7766E2F29A5613200E842ED /* Sendbird */ = {
+			isa = PBXGroup;
+			children = (
+				A7766E3029A5618300E842ED /* Extensions */,
+				A7766E2A29A557AE00E842ED /* SendbirdChannelProtocol.swift */,
+			);
+			path = Sendbird;
+			sourceTree = "<group>";
+		};
+		A7766E3029A5618300E842ED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A7766E2D29A5605100E842ED /* UserMessage+toChatMessage.swift */,
+				A7766E3129A5619A00E842ED /* OpenChannel+Extensions.swift */,
+				A7766E3329A561A500E842ED /* GroupChannel+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A8D8439F7C32E315E82A3ECF /* Pods */ = {
@@ -455,20 +609,42 @@
 				A7766DE929A3EA8D00E842ED /* SendbirdChannelsService.swift in Sources */,
 				A7766DDF29A3E56C00E842ED /* ChannelsViewModel.swift in Sources */,
 				A7766DE229A3EA1200E842ED /* Channel.swift in Sources */,
+				A7766E2029A5239100E842ED /* KeyboardInputAccessoryView.swift in Sources */,
+				A7766E1C29A5229500E842ED /* ImageConstants.swift in Sources */,
+				A7766E2E29A5605100E842ED /* UserMessage+toChatMessage.swift in Sources */,
 				A7766DE429A3EA1900E842ED /* ChatMessage.swift in Sources */,
 				A7766DF829A40BC300E842ED /* MainView.swift in Sources */,
 				A7766DEB29A3FF1000E842ED /* User.swift in Sources */,
 				A7766DAE29A3D03D00E842ED /* Logging.swift in Sources */,
+				A7766E0929A470D000E842ED /* MessagesViewModel.swift in Sources */,
+				A7766E0329A465FD00E842ED /* AsyncChatService.swift in Sources */,
+				A7766E3429A561A500E842ED /* GroupChannel+Extensions.swift in Sources */,
+				A7766E1529A4735C00E842ED /* ChannelRow.swift in Sources */,
+				A7766E1E29A5236400E842ED /* MessagesGridView.swift in Sources */,
+				A7766E1A29A5211A00E842ED /* Color+Extensions.swift in Sources */,
+				A7766E2429A5245A00E842ED /* KeyboardObserving.swift in Sources */,
 				A7766DAA29A3CE8D00E842ED /* ChatService.swift in Sources */,
+				A7766E0729A470C700E842ED /* MessagesView.swift in Sources */,
 				A7766DB629A3D17700E842ED /* ChatConfiguring.swift in Sources */,
+				A7766E2B29A557AE00E842ED /* SendbirdChannelProtocol.swift in Sources */,
+				A7766E1129A4714700E842ED /* Format.swift in Sources */,
+				A7766E0129A464E800E842ED /* AnyPublisher+Async.swift in Sources */,
 				A7766DBE29A3D7D700E842ED /* MockAuthService.swift in Sources */,
 				A7766DB129A3D06100E842ED /* AppConfig.swift in Sources */,
 				A7766DB829A3D18A00E842ED /* SendbirdChatConfig.swift in Sources */,
 				A7766DE629A3EA6B00E842ED /* ChannelsService.swift in Sources */,
+				A7766E0529A4690200E842ED /* AsyncChannelsService.swift in Sources */,
+				A7766E2629A5256600E842ED /* AsyncMessagesService.swift in Sources */,
 				A7766DB329A3D0E900E842ED /* SendbirdChatService.swift in Sources */,
+				A7766E0E29A470F100E842ED /* SendbirdMessagesService.swift in Sources */,
 				A7766DFA29A40BCF00E842ED /* MainViewModel.swift in Sources */,
+				A7766E3229A5619A00E842ED /* OpenChannel+Extensions.swift in Sources */,
+				A7766E1329A4723C00E842ED /* Date+Extensions.swift in Sources */,
 				A7766DBB29A3D61400E842ED /* AuthService.swift in Sources */,
+				A7766E2229A523C000E842ED /* ChatMessageBubbleView.swift in Sources */,
 				A7766D8E29A3C65300E842ED /* MessengerTestApp.swift in Sources */,
+				A7766DFD29A45E2000E842ED /* AsyncAuthService.swift in Sources */,
+				A7766E0B29A470D900E842ED /* MessagesService.swift in Sources */,
 				A7766DA729A3CC8900E842ED /* ChannelsView.swift in Sources */,
 				A7766DF329A408A800E842ED /* LoadingView.swift in Sources */,
 			);
