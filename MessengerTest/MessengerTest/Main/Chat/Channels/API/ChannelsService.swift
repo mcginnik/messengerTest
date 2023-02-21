@@ -14,9 +14,6 @@ protocol ChannelsServiceProtocol {
     func deleteChannel(_ channel: Channel, completion: @escaping (Result<Void, Error>) -> Void)
     func fetchChannels(forType type: ChannelType, completion: @escaping (Result<[Channel], Error>) -> Void)
     func loadNextPage(forType type: ChannelType, completion: @escaping (Result<[Channel], Error>) -> Void )
-    func fetchChannel(withURL url: String,
-                      type: ChannelType,
-                      completion: @escaping (Result<Channel, Error>) -> Void)
     func enterChannel(_ channel: Channel, completion: @escaping (Result<Void, Error>) -> Void )
 }
 
@@ -90,23 +87,6 @@ class ChannelsService {
     func fetchChannels(forType type: ChannelType, completion: @escaping (Result<[Channel], Error>) -> Void ) {
         Logging.LogMe("...")
         injected?.fetchChannels(forType: type) { res in
-            DispatchQueue.main.async {
-                switch res {
-                case .success:
-                    Logging.LogMe("Success!...")
-                case .failure(let error):
-                    Logging.LogMe("Failed! ... \(error)")
-                }
-                completion(res)
-            }
-        }
-    }
-    
-    func fetchChannel(withURL url: String,
-                      type: ChannelType,
-                      completion: @escaping (Result<Channel, Error>) -> Void) {
-        Logging.LogMe("...")
-        injected?.fetchChannel(withURL: url, type: type) { res in
             DispatchQueue.main.async {
                 switch res {
                 case .success:

@@ -84,6 +84,7 @@ class MessagesViewModel: ObservableObject {
     }
     
     deinit {
+        Logging.LogMe("...")
         guard let channel = channel else { return }
         MessagesService.shared.removeMessagesConnection(channel: channel){_ in }
     }

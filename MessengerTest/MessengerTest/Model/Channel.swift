@@ -24,7 +24,7 @@ enum ChannelType: CaseIterable {
     }
 }
 
-struct Channel: Identifiable, Hashable, Comparable {
+struct Channel {
     
     // Change this to timestamp
     static func < (lhs: Channel, rhs: Channel) -> Bool {
@@ -36,8 +36,21 @@ struct Channel: Identifiable, Hashable, Comparable {
     let type: ChannelType
     let createdAt: Int64
     let name: String
+    let innerObject: Any?
     
     static func getTestChannel() -> Channel {
-        .init(id: "", url: "", type: .open, createdAt: 0, name: "Test Channel")
+        .init(id: "", url: "", type: .open, createdAt: 0, name: "Test Channel", innerObject: nil)
     }
+}
+
+extension Channel: Identifiable, Hashable, Comparable {
+    
+    static func == (lhs: Channel, rhs: Channel) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
 }

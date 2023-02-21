@@ -14,7 +14,6 @@ protocol AsyncChannelsServiceProtocol {
     func deleteChannel(_ channel: Channel) async throws -> Void
     func fetchChannels(forType type: ChannelType) async throws -> [Channel]
     func loadNextPage(forType type: ChannelType) async throws -> [Channel]
-    func fetchChannel(withURL url: String, type: ChannelType) async throws -> Channel
     func enterChannel(_ channel: Channel) async throws
 
 }
@@ -68,23 +67,6 @@ class AsyncChannelsService: AsyncChannelsServiceProtocol {
     func fetchChannels(forType type: ChannelType) async throws -> [Channel] {
         let future = Future<[Channel], Error> { promise in
             ChannelsService.shared.fetchChannels(forType: type) { res in
-                switch res {
-                case .success(let data):
-                    return promise(.success(data))
-                case .failure(let error):
-                    return promise(.failure(error))
-                }
-            }
-        }
-        .eraseToAnyPublisher()
-        
-        let res = try await future.async()
-        return res
-    }
-    
-    func fetchChannel(withURL url: String, type: ChannelType) async throws -> Channel {
-        let future = Future<Channel, Error> { promise in
-            ChannelsService.shared.fetchChannel(withURL: url, type: type) { res in
                 switch res {
                 case .success(let data):
                     return promise(.success(data))
