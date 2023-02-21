@@ -57,6 +57,8 @@ class SendbirdChatService: ChatServiceProtocol {
     
     func deinitialize(completion: @escaping (Result<Void, Error>) -> Void) {
         //
+        SendbirdChat.disconnect()
+        completion(.success(()))
     }
     
     
