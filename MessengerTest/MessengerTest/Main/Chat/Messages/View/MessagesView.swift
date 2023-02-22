@@ -21,8 +21,8 @@ struct MessagesView: View {
     // MARK: - Views
 
     var keyboardInputAccessoryView: some View {
-        KeyboardInputAccessoryView(text: $viewModel.chatInputText, focusedField: _focusedField){
-            sendButtonWasTapped()
+        KeyboardInputAccessoryView(text: $viewModel.chatInputText, focusedField: _focusedField) { image in
+            sendButtonWasTapped(image: image)
         }
         .keyboardObserving { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -84,8 +84,8 @@ struct MessagesView: View {
         }
     }
     
-    private func sendButtonWasTapped(){
-        self.viewModel.handleSend()
+    private func sendButtonWasTapped(image: UIImage?){
+        self.viewModel.handleSend(image: image)
     }
 
 }

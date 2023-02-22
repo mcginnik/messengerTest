@@ -10,11 +10,20 @@ import SwiftUI
 struct KeyboardInputAccessoryView: View {
     
     @Binding var text: String
+    @State var image: UIImage? = nil
+    @State var showImagePicker: Bool = false
     @FocusState var focusedField: Bool
     private var height: CGFloat
-    let sendButtonWasTapped:  () -> Void
+    let sendButtonWasTapped:  (UIImage?) -> Void
+
+    var sendButtonDisabled: Bool {
+        text.isEmpty && image == nil
+    }
     
-    init(text: Binding<String>, height: CGFloat = 40, focusedField: FocusState<Bool>? = nil, sendButtonWasTapped: @escaping () -> Void){
+    init(text: Binding<String>,
+         height: CGFloat = 40,
+         focusedField: FocusState<Bool>? = nil,
+         sendButtonWasTapped: @escaping (UIImage?) -> Void){
         self._text = text
         
         if let focusedField = focusedField {
@@ -26,36 +35,65 @@ struct KeyboardInputAccessoryView: View {
     }
     
     var textField: some View {
-        TextField(StringConstants.textInputPlaceholder, text: $text)
-            .padding(.horizontal)
-            .frame(height: height)
-            .background(Color.secondary)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .focused($focusedField)
-            .keyboardType(.default)
+        VStack {
+            if let image = image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: height)
+            }
+            TextField(StringConstants.textInputPlaceholder, text: $text)
+                .padding(.horizontal)
+                .frame(height: height)
+                .background(Color.secondary)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .focused($focusedField)
+                .keyboardType(.default)
+        }
+        
+
     }
     
     var sendButton: some View {
         Button {
-            self.sendButtonWasTapped()
+            self.sendButtonWasTapped(image)
+            image = nil
         } label: {
             Image(systemName: ImageConstants.sendButton)
                 .foregroundColor(.white)
                 .frame(width: height, height: height)
                 .background(
                     Circle()
-                        .foregroundColor(text.isEmpty ? .gray : .blue)
+                        .foregroundColor(sendButtonDisabled ? .gray : .blue)
                 )
         }
-        .disabled(text.isEmpty)
+        .disabled(sendButtonDisabled)
+    }
+    
+    var imageButton: some View {
+        Button {
+            showImagePicker.toggle()
+        } label: {
+            Image(systemName: ImageConstants.imageButton)
+                .foregroundColor(.white)
+                .frame(width: height, height: height)
+                .background(
+                    Circle()
+                        .foregroundColor(.blue)
+                )
+        }
     }
     
     var body: some View {
         VStack {
             HStack {
+                imageButton
                 textField
                 sendButton
             }
+        }
+        .fullScreenCover(isPresented: $showImagePicker, onDismiss: nil) {
+            ImagePicker(image: $image)
         }
         .padding()
         .background(.thickMaterial)
@@ -65,6 +103,7 @@ struct KeyboardInputAccessoryView: View {
 
 struct KeyboardInputAccessoryView_Previews: PreviewProvider {
     static var previews: some View {
-        KeyboardInputAccessoryView(text: .constant("Test"), sendButtonWasTapped: {})
+        KeyboardInputAccessoryView(text: .constant("Test"),
+                                   sendButtonWasTapped: {_ in})
     }
 }

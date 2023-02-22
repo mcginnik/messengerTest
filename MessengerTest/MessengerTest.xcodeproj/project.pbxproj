@@ -52,6 +52,7 @@
 		A7766E2E29A5605100E842ED /* UserMessage+toChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E2D29A5605100E842ED /* UserMessage+toChatMessage.swift */; };
 		A7766E3229A5619A00E842ED /* OpenChannel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E3129A5619A00E842ED /* OpenChannel+Extensions.swift */; };
 		A7766E3429A561A500E842ED /* GroupChannel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E3329A561A500E842ED /* GroupChannel+Extensions.swift */; };
+		A7766E3629A59B6200E842ED /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7766E3529A59B6200E842ED /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		A7766E2D29A5605100E842ED /* UserMessage+toChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMessage+toChatMessage.swift"; sourceTree = "<group>"; };
 		A7766E3129A5619A00E842ED /* OpenChannel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenChannel+Extensions.swift"; sourceTree = "<group>"; };
 		A7766E3329A561A500E842ED /* GroupChannel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupChannel+Extensions.swift"; sourceTree = "<group>"; };
+		A7766E3529A59B6200E842ED /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FB1D765DBBF3999954650E21 /* Pods-MessengerTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessengerTest.debug.xcconfig"; path = "Target Support Files/Pods-MessengerTest/Pods-MessengerTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -349,6 +351,7 @@
 			children = (
 				A7766E2829A5286900E842ED /* Keyboard */,
 				A7766DF229A408A800E842ED /* LoadingView.swift */,
+				A7766E3529A59B6200E842ED /* ImagePicker.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				A7766DE629A3EA6B00E842ED /* ChannelsService.swift in Sources */,
 				A7766E0529A4690200E842ED /* AsyncChannelsService.swift in Sources */,
 				A7766E2629A5256600E842ED /* AsyncMessagesService.swift in Sources */,
+				A7766E3629A59B6200E842ED /* ImagePicker.swift in Sources */,
 				A7766DB329A3D0E900E842ED /* SendbirdChatService.swift in Sources */,
 				A7766E0E29A470F100E842ED /* SendbirdMessagesService.swift in Sources */,
 				A7766DFA29A40BCF00E842ED /* MainViewModel.swift in Sources */,

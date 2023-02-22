@@ -21,7 +21,7 @@ struct ChatMessage {
     let createdAt: Int64
     let createdBy: User
     let text: String?
-    let data: Data?
+    let imageURL: String?
     
     static func getTestMessage() -> ChatMessage {
         return .init(id: "",
@@ -29,7 +29,7 @@ struct ChatMessage {
                      createdAt: 0,
                      createdBy: .init(id: "0"),
                      text: "test message",
-                     data: nil)
+                     imageURL: nil)
     }
 }
 
