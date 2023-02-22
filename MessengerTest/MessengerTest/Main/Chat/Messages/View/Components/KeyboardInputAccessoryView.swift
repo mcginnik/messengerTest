@@ -16,6 +16,9 @@ struct KeyboardInputAccessoryView: View {
     private var height: CGFloat
     let sendButtonWasTapped:  (UIImage?) -> Void
 
+    var sendButtonDisabled: Bool {
+        text.isEmpty && image == nil
+    }
     
     init(text: Binding<String>,
          height: CGFloat = 40,
@@ -61,10 +64,10 @@ struct KeyboardInputAccessoryView: View {
                 .frame(width: height, height: height)
                 .background(
                     Circle()
-                        .foregroundColor(text.isEmpty ? .gray : .blue)
+                        .foregroundColor(sendButtonDisabled ? .gray : .blue)
                 )
         }
-        .disabled(text.isEmpty)
+        .disabled(sendButtonDisabled)
     }
     
     var imageButton: some View {
