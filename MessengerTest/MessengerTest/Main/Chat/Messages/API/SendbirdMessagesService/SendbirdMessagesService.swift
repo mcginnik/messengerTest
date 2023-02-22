@@ -62,21 +62,12 @@ class SendbirdMessagesService: MessagesServiceProtocol {
         channelConnections[channel.id] = { res in
             switch res {
             case .success(let message):
-                guard message.channelURL == channel.url else {
+                guard let message = message as? UserMessage, message.channelURL == channel.url else {
                     didUpdate(.failure(MessagesServiceError.wrongChannel))
                     return
                 }
-                guard let sender = message.sender else {
-                    didUpdate(.failure(MessagesServiceError.emptyData))
-                    return
-                }
                 
-                didUpdate(.success(ChatMessage(id: String(describing: message.id),
-                                               type: .text,
-                                               createdAt: message.createdAt,
-                                               createdBy: User(id: sender.id),
-                                               text: message.message,
-                                               imageURL: nil)))
+                didUpdate(.success(message.toChatMessage()))
             case .failure(let error):
                 didUpdate(.failure(error))
             }
@@ -102,17 +93,12 @@ class SendbirdMessagesService: MessagesServiceProtocol {
                 return
             }
             
-            guard let userMessage = userMessage, let sender = userMessage.sender else {
+            guard let userMessage = userMessage else {
                 completion(.failure(MessagesServiceError.emptyData))
                 return
             }
             
-            completion(.success(ChatMessage(id: String(describing: userMessage.id),
-                                            type: .text,
-                                            createdAt: userMessage.createdAt,
-                                            createdBy: User(id: sender.id),
-                                            text: userMessage.message,
-                                            imageURL: nil)))
+            completion(.success(userMessage.toChatMessage()))
         }
     }
     
@@ -126,13 +112,8 @@ class SendbirdMessagesService: MessagesServiceProtocol {
                 return
             }
             
-            if let message = message, let sender = message.sender {
-                completion(.success(ChatMessage(id: String(describing: message.id),
-                                                type: .file,
-                                                createdAt: message.createdAt,
-                                                createdBy: User(id: sender.id),
-                                                text: "",
-                                                imageURL: message.url)))
+            if let message = message {
+                completion(.success(message.toChatMessage()))
             } else {
                 completion(.failure(MessagesServiceError.emptyData))
             }
@@ -145,16 +126,16 @@ extension SendbirdMessagesService: OpenChannelDelegate {
     func channel(_ sender: BaseChannel, didReceive message: BaseMessage) {
         // You can customize how to display the different types of messages
         // with the result object in the message parameter.
-        if message is UserMessage {
+        if let message = message as? UserMessage {
             channelConnections.forEach { (id, didUpdate) in
                 didUpdate(.success(message))
             }
         }
         else if message is FileMessage {
-//            Logging.LogMe("...filemessage!")
-//            channelConnections.forEach { (id, didUpdate) in
-//                didUpdate(.success(message))
-//            }
+            Logging.LogMe("...filemessage!")
+            channelConnections.forEach { (id, didUpdate) in
+                didUpdate(.success(message))
+            }
         }
         else if message is AdminMessage {
 //            channelConnections.forEach { (id, didUpdate) in
