@@ -34,22 +34,19 @@ class MessagesViewModel: ObservableObject {
     func sendMessage(withText text: String, image: UIImage?) async {
         do {
             guard let channel = channel else { throw MessagesServiceError.nilChannel }
-            let message = try await AsyncMessagesService.shared.sendMessage(withText: text,
-                                                                            channel: channel)
-            chatInputText = ""
-            insertMessages([message])
             
+            if text.isEmpty == false {
+                let message = try await AsyncMessagesService.shared.sendMessage(withText: text,
+                                                                                channel: channel)
+                chatInputText = ""
+                insertMessages([message])
+            }
+
             if let image = image {
-                Logging.LogMe("... insertMessages first0")
                 let message = try await AsyncMessagesService.shared.sendImageMessage(withImage: image,
                                                                                 channel: channel)
                 insertMessages([message])
-                Logging.LogMe("... insertMessages first1")
-
-                Logging.LogMe("... insertMessages filemessage :) \(message)")
-
             }
-            Logging.LogMe("... sending message :) ")
         } catch {
             Logging.LogMe("Failed!... \(error)")
         }

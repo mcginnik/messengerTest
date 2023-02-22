@@ -13,7 +13,7 @@ struct ChatMessageBubbleView: View {
     let width: CGFloat
     
     var isReceived: Bool {
-        message.createdBy.id != AuthService.shared.currentUser?.id
+        message.createdBy?.id != AuthService.shared.currentUser?.id
     }
     
     var imageView: some View {
