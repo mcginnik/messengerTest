@@ -5,14 +5,13 @@
 //  Created by Kyle McGinnis on 2/20/23.
 //
 
-import Foundation
+import UIKit
 
 protocol MessagesServiceProtocol {
-//    func createChannel(withName name: String, completion: @escaping (Result<Channel, Error>) -> Void)
-//    func deleteChannel(withURL url: ChannelURL, completion: @escaping (Result<Void, Error>) -> Void)
-//    func fetchOpenChannels(completion: @escaping (Result<[Channel], Error>) -> Void)
-//    func loadNextPage(completion: @escaping (Result<[Channel], Error>) -> Void )
     func sendMessage(withText text: String,
+                     channel: Channel,
+                     completion: @escaping (Result<ChatMessage, Error>) -> Void)
+    func sendImageMessage(withImage image: UIImage,
                      channel: Channel,
                      completion: @escaping (Result<ChatMessage, Error>) -> Void)
     func startMessagesConnection(channel: Channel,
@@ -75,6 +74,23 @@ class MessagesService {
         }
     }
     
+    func sendImageMessage(withImage image: UIImage,
+                     channel: Channel,
+                     completion: @escaping (Result<ChatMessage, Error>) -> Void) {
+        Logging.LogMe("...")
+        injected?.sendImageMessage(withImage: image, channel: channel) { res in
+            DispatchQueue.main.async {
+                switch res {
+                case .success:
+                    Logging.LogMe("Success!...")
+                case .failure(let error):
+                    Logging.LogMe("Failed! ... \(error)")
+                }
+                completion(res)
+            }
+        }
+    }
+    
     func startMessagesConnection(channel: Channel,
                                  didUpdate: @escaping (Result<ChatMessage, Error>) -> Void) {
         Logging.LogMe("...")
@@ -105,50 +121,5 @@ class MessagesService {
             }
         }
     }
-    
-//    func deleteChannel(withURL url: ChannelURL, completion: @escaping (Result<Void, Error>) -> Void) {
-//        Logging.LogMe("...")
-//        injected?.deleteChannel(withURL: url) { res in
-//            DispatchQueue.main.async {
-//                switch res {
-//                case .success:
-//                    Logging.LogMe("Success!...")
-//                case .failure(let error):
-//                    Logging.LogMe("Failed! ... \(error)")
-//                }
-//                completion(res)
-//            }
-//        }
-//    }
-//    
-//    func fetchOpenChannels(completion: @escaping (Result<[Channel], Error>) -> Void ) {
-//        Logging.LogMe("...")
-//        injected?.fetchOpenChannels { res in
-//            DispatchQueue.main.async {
-//                switch res {
-//                case .success:
-//                    Logging.LogMe("Success!...")
-//                case .failure(let error):
-//                    Logging.LogMe("Failed! ... \(error)")
-//                }
-//                completion(res)
-//            }
-//        }
-//    }
-//    
-//    func loadNextPage(completion: @escaping (Result<[Channel], Error>) -> Void ) {
-//        Logging.LogMe("...")
-//        injected?.loadNextPage { res in
-//            DispatchQueue.main.async {
-//                switch res {
-//                case .success:
-//                    Logging.LogMe("Success!...")
-//                case .failure(let error):
-//                    Logging.LogMe("Failed! ... \(error)")
-//                }
-//                completion(res)
-//            }
-//        }
-//    }
     
 }

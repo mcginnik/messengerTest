@@ -5,7 +5,7 @@
 //  Created by Kyle McGinnis on 2/20/23.
 //
 
-import Foundation
+import UIKit
 import SendbirdChatSDK
 
 class SendbirdMessagesService: MessagesServiceProtocol {
@@ -25,6 +25,28 @@ class SendbirdMessagesService: MessagesServiceProtocol {
         
         if let channel = channel.innerObject as? SendbirdChannelProtocol {
             sendUserMessage(channel: channel, params: params, completion: completion)
+        } else {
+            completion(.failure(MessagesServiceError.nilChannel))
+        }
+    }
+    
+    func sendImageMessage(withImage image: UIImage,
+                          channel: Channel,
+                          completion: @escaping (Result<ChatMessage, Error>) -> Void) {
+        
+        if let channel = channel.innerObject as? SendbirdChannelProtocol, let data = image.jpegData(compressionQuality: 0.5) {
+            let params = FileMessageCreateParams()
+            params.file = data
+            Logging.LogMe("... FileMessageCreateParams")
+            sendFileMessage(channel: channel, params: [params]) { res in
+                switch res {
+                case .success:
+                    Logging.LogMe("sendFileMessage Success!!!")
+                case .failure(let error):
+                    Logging.LogMe("... sendFileMessage error \(error)" )
+                }
+                completion(res)
+            }
         } else {
             completion(.failure(MessagesServiceError.nilChannel))
         }
@@ -54,7 +76,7 @@ class SendbirdMessagesService: MessagesServiceProtocol {
                                                createdAt: message.createdAt,
                                                createdBy: User(id: sender.id),
                                                text: message.message,
-                                               data: nil)))
+                                               imageURL: nil)))
             case .failure(let error):
                 didUpdate(.failure(error))
             }
@@ -90,8 +112,31 @@ class SendbirdMessagesService: MessagesServiceProtocol {
                                             createdAt: userMessage.createdAt,
                                             createdBy: User(id: sender.id),
                                             text: userMessage.message,
-                                            data: nil)))
+                                            imageURL: nil)))
         }
+    }
+    
+    private func sendFileMessage(channel: SendbirdChannelProtocol,
+                                 params: [FileMessageCreateParams],
+                                 completion: @escaping (Result<ChatMessage, Error>) -> Void){
+        
+        _ = channel.sendFileMessages(params: params, progressHandler: nil) { message, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            if let message = message, let sender = message.sender {
+                completion(.success(ChatMessage(id: String(describing: message.id),
+                                                type: .file,
+                                                createdAt: message.createdAt,
+                                                createdBy: User(id: sender.id),
+                                                text: "",
+                                                imageURL: message.url)))
+            } else {
+                completion(.failure(MessagesServiceError.emptyData))
+            }
+        } completionHandler: { _ in }
     }
 }
 
@@ -106,7 +151,10 @@ extension SendbirdMessagesService: OpenChannelDelegate {
             }
         }
         else if message is FileMessage {
-
+//            Logging.LogMe("...filemessage!")
+//            channelConnections.forEach { (id, didUpdate) in
+//                didUpdate(.success(message))
+//            }
         }
         else if message is AdminMessage {
 //            channelConnections.forEach { (id, didUpdate) in

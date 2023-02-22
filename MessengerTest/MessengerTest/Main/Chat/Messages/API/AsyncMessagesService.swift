@@ -5,11 +5,12 @@
 //  Created by Kyle McGinnis on 2/21/23.
 //
 
-import Foundation
+import UIKit
 import Combine
 
 protocol AsyncMessagesServiceProtocol {
     func sendMessage(withText text: String, channel: Channel) async throws -> ChatMessage
+    func sendImageMessage(withImage image: UIImage, channel: Channel) async throws -> ChatMessage
     func startMessagesConnection(channel: Channel) async throws -> ChatMessage
     func removeMessagesConnection(channel: Channel) async throws
 }
@@ -42,6 +43,25 @@ class AsyncMessagesService: AsyncMessagesServiceProtocol {
         let res = try await future.async()
         return res
     }
+    
+    func sendImageMessage(withImage image: UIImage, channel: Channel) async throws -> ChatMessage {
+        let future = Future<ChatMessage, Error> { promise in
+            MessagesService.shared.sendImageMessage(withImage: image, channel: channel) { res in
+                switch res {
+                case .success(let data):
+                    return promise(.success(data))
+                case .failure(let error):
+                    return promise(.failure(error))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+        
+        let res = try await future.async()
+        return res
+        
+    }
+
     
     func startMessagesConnection(channel: Channel) async throws -> ChatMessage {
         let future = Future<ChatMessage, Error> { promise in

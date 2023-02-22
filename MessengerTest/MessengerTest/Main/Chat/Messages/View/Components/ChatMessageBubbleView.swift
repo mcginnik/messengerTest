@@ -16,16 +16,42 @@ struct ChatMessageBubbleView: View {
         message.createdBy.id != AuthService.shared.currentUser?.id
     }
     
+    var imageView: some View {
+        AsyncImage(url: URL(string: message.imageURL ?? "")){ phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+            case .success(let image):
+                image
+                    .resizable()
+                    .scaledToFit()
+            case .failure:
+                EmptyView()
+            @unknown default:
+                EmptyView()
+            }
+        }
+    }
+    
     var messageAndImage: some View {
         HStack(alignment: .top) {
             if isReceived {
                 getUserImage(for: message)
             }
-            Text(message.text ?? "")
-                .padding()
-                .foregroundColor(isReceived ? .customChatBubbleLeftText : .customChatBubbleRightText)
-                .background(getBackgroundColor(for: message))
-                .cornerRadius(18)
+            VStack {
+                if let text = message.text, !text.isEmpty {
+                    Text(text)
+                        .padding()
+                        .foregroundColor(isReceived ? .customChatBubbleLeftText : .customChatBubbleRightText)
+                        .background(getBackgroundColor(for: message))
+                        .cornerRadius(18)
+                }
+                if let _ = message.imageURL {
+                    imageView
+                        .cornerRadius(18)
+                }
+            }
+
         }
     }
     

@@ -13,5 +13,6 @@ struct ImageConstants {
     
     static let plus = "plus"
     static let sendButton = "paperplane.fill"
+    static let imageButton = "photo.fill"
     
 }
