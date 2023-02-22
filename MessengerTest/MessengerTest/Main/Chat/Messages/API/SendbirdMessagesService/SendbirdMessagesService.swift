@@ -37,7 +37,6 @@ class SendbirdMessagesService: MessagesServiceProtocol {
         SendbirdChat.addChannelDelegate(self, identifier: channel.id)
         
         Logging.LogMe("... should have delegate set... \(channel)")
-        
         channelConnections[channel.id] = { res in
             switch res {
             case .success(let message):
@@ -101,17 +100,18 @@ extension SendbirdMessagesService: OpenChannelDelegate {
     func channel(_ sender: BaseChannel, didReceive message: BaseMessage) {
         // You can customize how to display the different types of messages
         // with the result object in the message parameter.
-        Logging.LogMe("... delegate set? \(message)")
         if message is UserMessage {
             channelConnections.forEach { (id, didUpdate) in
                 didUpdate(.success(message))
             }
         }
         else if message is FileMessage {
-            
+
         }
         else if message is AdminMessage {
-            
+//            channelConnections.forEach { (id, didUpdate) in
+//                didUpdate(.success(message))
+//            }
         }
     }
 }

@@ -18,6 +18,9 @@ struct ChatMessageBubbleView: View {
     
     var messageAndImage: some View {
         HStack(alignment: .top) {
+            if isReceived {
+                getUserImage(for: message)
+            }
             Text(message.text ?? "")
                 .padding()
                 .foregroundColor(isReceived ? .customChatBubbleLeftText : .customChatBubbleRightText)
@@ -39,6 +42,16 @@ struct ChatMessageBubbleView: View {
     
     private func getBackgroundColor(for message: ChatMessage) -> Color {
         return isReceived ? .customChatBubbleLeftBackground : .customChatBubbleRightBackground
+    }
+    
+    private func getUserImage(for message: ChatMessage) -> some View {
+        Image(systemName: "person.fill")
+            .foregroundColor(.primary)
+            .frame(width: 36, height: 36)
+            .clipped()
+            .cornerRadius(.infinity)
+            .overlay(RoundedRectangle(cornerRadius: .infinity)
+                        .stroke(Color.secondary, lineWidth: 1))
     }
 
 }

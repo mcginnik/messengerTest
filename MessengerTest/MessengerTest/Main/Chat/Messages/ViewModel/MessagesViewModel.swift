@@ -25,7 +25,8 @@ class MessagesViewModel: ObservableObject {
     
     private var messageSet: Set<ChatMessage> = [] {
         didSet {
-            messages = Array(messageSet).sorted()
+            messages = Array(messageSet).sorted(by: >)
+            messageToScrollTo = messages.last
         }
     }
     
@@ -33,8 +34,9 @@ class MessagesViewModel: ObservableObject {
     func sendMessage(withText text: String) async {
         do {
             guard let channel = channel else { throw MessagesServiceError.nilChannel }
-            _ = try await AsyncMessagesService.shared.sendMessage(withText: text, channel: channel)
+            let message = try await AsyncMessagesService.shared.sendMessage(withText: text, channel: channel)
             chatInputText = ""
+            insertMessages([message])
             Logging.LogMe("... sending message :) ")
         } catch {
             Logging.LogMe("Failed!... \(error)")
@@ -72,6 +74,7 @@ class MessagesViewModel: ObservableObject {
     func handleSend(){
         Task {
             await sendMessage(withText: chatInputText)
+            
         }
     }
     
