@@ -37,14 +37,7 @@ class SendbirdMessagesService: MessagesServiceProtocol {
         if let channel = channel.innerObject as? SendbirdChannelProtocol, let data = image.jpegData(compressionQuality: 0.5) {
             let params = FileMessageCreateParams()
             params.file = data
-            Logging.LogMe("... FileMessageCreateParams")
             sendFileMessage(channel: channel, params: [params]) { res in
-                switch res {
-                case .success:
-                    Logging.LogMe("sendFileMessage Success!!!")
-                case .failure(let error):
-                    Logging.LogMe("... sendFileMessage error \(error)" )
-                }
                 completion(res)
             }
         } else {
@@ -58,16 +51,19 @@ class SendbirdMessagesService: MessagesServiceProtocol {
         
         SendbirdChat.addChannelDelegate(self, identifier: channel.id)
         
-        Logging.LogMe("... should have delegate set... \(channel)")
         channelConnections[channel.id] = { res in
             switch res {
             case .success(let message):
-                guard let message = message as? UserMessage, message.channelURL == channel.url else {
+                guard message.channelURL == channel.url else {
                     didUpdate(.failure(MessagesServiceError.wrongChannel))
                     return
                 }
                 
-                didUpdate(.success(message.toChatMessage()))
+                if let message = message as? ChatMessageConverting {
+                    didUpdate(.success(message.toChatMessage()))
+                } else {
+                    didUpdate(.failure(MessagesServiceError.emptyData))
+                }
             case .failure(let error):
                 didUpdate(.failure(error))
             }
@@ -132,7 +128,6 @@ extension SendbirdMessagesService: OpenChannelDelegate {
             }
         }
         else if message is FileMessage {
-            Logging.LogMe("...filemessage!")
             channelConnections.forEach { (id, didUpdate) in
                 didUpdate(.success(message))
             }

@@ -8,7 +8,11 @@
 import Foundation
 import SendbirdChatSDK
 
-extension UserMessage {
+protocol ChatMessageConverting {
+    func toChatMessage() -> ChatMessage
+}
+
+extension UserMessage: ChatMessageConverting {
     
     func toChatMessage() -> ChatMessage {
         var creator: User?
@@ -26,7 +30,7 @@ extension UserMessage {
     }
 }
 
-extension FileMessage {
+extension FileMessage: ChatMessageConverting {
     
     func toChatMessage() -> ChatMessage {
         var creator: User?
